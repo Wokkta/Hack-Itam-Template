@@ -1,24 +1,18 @@
-import { AntDesignOutlined } from '@ant-design/icons';
-
-import { Avatar, List, Space } from 'antd';
-
+import { useState } from 'react';
+import { Avatar, Menu } from 'antd';
+import {
+  CommentOutlined,
+  AntDesignOutlined,
+  MailOutlined,
+  RadarChartOutlined,
+  StockOutlined,
+} from '@ant-design/icons';
 import { Descriptions } from 'antd';
 import { useParams } from 'react-router-dom';
 import HackatonList from '../components/HackatonList';
+import CommandsList from '../components/commandsList';
 
 const Descriptions_items = [
-  {
-    label: 'Достижения',
-    span: {
-      xs: 1,
-      sm: 2,
-      md: 3,
-      lg: 3,
-      xl: 2,
-      xxl: 2,
-    },
-    children: '...',
-  },
   {
     label: 'Количество участий в хакатонах',
     span: {
@@ -29,7 +23,7 @@ const Descriptions_items = [
       xl: 2,
       xxl: 2,
     },
-    children: '...',
+    children: '12',
   },
   {
     label: 'Роль(и)',
@@ -41,41 +35,92 @@ const Descriptions_items = [
       xl: 2,
       xxl: 2,
     },
-    children: '...',
+    children: 'backend developer , frontend developer',
   },
 ];
-
+const Sections = [
+  {
+    label: 'Хакатоны',
+    key: 'hackatons',
+    icon: <MailOutlined />,
+  },
+  {
+    label: 'Команды',
+    key: 'teams',
+    icon: <CommentOutlined />,
+  },
+  {
+    label: 'Достижения',
+    key: 'achievements',
+    icon: <StockOutlined />,
+  },
+  {
+    label: 'Статистика',
+    key: 'statistics',
+    icon: <RadarChartOutlined />,
+  },
+];
+const SectionsComponents = {
+  hackatons: <HackatonList />,
+  teams: <CommandsList />,
+  achievements: <HackatonList />,
+};
 function UserPage() {
+  const [current, setCurrent] = useState('hackatons');
   const { id } = useParams();
+
   const data = false;
+
+  const handleChangeCategory = (e) => {
+    console.log('click ', e);
+    setCurrent(e.key);
+  };
+
   return (
     <section>
-      {data ? (
-        <Avatar
-          size={{ xs: 100, sm: 100, md: 100, lg: 100, xl: 100, xxl: 100 }}
-          src={<img src={data.url} alt="avatar" />}
-        />
-      ) : (
-        <Avatar
-          size={{ xs: 100, sm: 100, md: 100, lg: 100, xl: 100, xxl: 100 }}
-          icon={<AntDesignOutlined />}
-        />
-      )}
+      <div style={{ display: 'flex', justifyContent: 'space-around', width: '80vw' }}>
+        {data ? (
+          <Avatar
+            size={{ xs: 100, sm: 100, md: 100, lg: 100, xl: 100, xxl: 100 }}
+            src={<img src={data.url} alt="avatar" />}
+          />
+        ) : (
+          <Avatar
+            size={{ xs: 100, sm: 100, md: 100, lg: 100, xl: 100, xxl: 100 }}
+            icon={<AntDesignOutlined />}
+          />
+        )}
 
-      <Descriptions
-        title=""
-        bordered
-        column={{
-          xs: 1,
-          sm: 2,
-          md: 3,
-          lg: 3,
-          xl: 4,
-          xxl: 4,
-        }}
-        items={Descriptions_items}
-      />
-      <HackatonList />
+        <Descriptions
+          title=""
+          bordered
+          column={{
+            xs: 1,
+            sm: 2,
+            md: 3,
+            lg: 3,
+            xl: 4,
+            xxl: 4,
+          }}
+          items={Descriptions_items}
+        />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          marginLeft: '10%',
+        }}>
+        <Menu
+          onClick={handleChangeCategory}
+          selectedKeys={[current]}
+          mode="horizontal"
+          items={Sections}
+        />
+        {SectionsComponents[current]}
+      </div>
     </section>
   );
 }

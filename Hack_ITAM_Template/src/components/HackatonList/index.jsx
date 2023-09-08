@@ -10,10 +10,10 @@ const data = Array.from({ length: 23 }).map((_, i) => ({
   content:
     'Хакатоны обычно представляют собой соревнование, где участники работают в командах, чтобы решить реальные проблемы или создать новые продукты и сервисы.',
 }));
-const IconText = ({ icon, text }) => (
+const IconText = (props) => (
   <Space>
-    {React.createElement(icon)}
-    {text}
+    {React.createElement(props.icon)}
+    {props.text}
   </Space>
 );
 const HackatonList = () => (
@@ -25,9 +25,10 @@ const HackatonList = () => (
         console.log(page);
       },
       pageSize: 3,
+      position: 'bottom',
+      align: 'center',
     }}
     dataSource={data}
-    header={<div>Хакатоны</div>}
     renderItem={(item) => (
       <List.Item
         key={item.title}
