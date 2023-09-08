@@ -9,35 +9,10 @@ import {
 } from '@ant-design/icons';
 import { Descriptions } from 'antd';
 import { useParams } from 'react-router-dom';
-import HackatonList from '../components/HackatonList';
-import CommandsList from '../components/commandsList';
 
-const Descriptions_items = [
-  {
-    label: 'Количество участий в хакатонах',
-    span: {
-      xs: 1,
-      sm: 2,
-      md: 3,
-      lg: 3,
-      xl: 2,
-      xxl: 2,
-    },
-    children: '12',
-  },
-  {
-    label: 'Роль(и)',
-    span: {
-      xs: 1,
-      sm: 2,
-      md: 3,
-      lg: 3,
-      xl: 2,
-      xxl: 2,
-    },
-    children: 'backend developer , frontend developer',
-  },
-];
+import CommandsList from '../components/commandsList';
+import UserHackatonList from '../components/UserHackatonList';
+
 const Sections = [
   {
     label: 'Хакатоны',
@@ -61,14 +36,52 @@ const Sections = [
   },
 ];
 const SectionsComponents = {
-  hackatons: <HackatonList />,
+  hackatons: <UserHackatonList />,
   teams: <CommandsList />,
-  achievements: <HackatonList />,
+  achievements: <UserHackatonList />,
 };
 function UserPage() {
   const [current, setCurrent] = useState('hackatons');
   const { id } = useParams();
 
+  const Descriptions_items = [
+    {
+      label: 'Количество участий в хакатонах',
+      span: {
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 2,
+        xxl: 2,
+      },
+      children: '12',
+    },
+    {
+      label: 'User Id',
+      span: {
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 2,
+        xxl: 2,
+      },
+      children: `${id}`,
+    },
+    {
+      label: 'Роль(и)',
+      span: {
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 2,
+        xxl: 2,
+      },
+      children: 'backend developer , frontend developer',
+    },
+  ];
   const data = false;
 
   const handleChangeCategory = (e) => {

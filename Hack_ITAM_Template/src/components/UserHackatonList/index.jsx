@@ -4,7 +4,7 @@ import { Avatar, List, Space } from 'antd';
 const data = Array.from({ length: 23 }).map((_, i) => ({
   href: 'https://example.com',
   title: `Пример хакатона ${i}`,
-  avatar: 'https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}',
+  avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
   description:
     'Пример хакатона - это мероприятие, где разработчики идеализируют, проектируют и создают программное обеспечение или аппаратное обеспечение за ограниченное время.',
   content:
@@ -16,7 +16,7 @@ const IconText = (props) => (
     {props.text}
   </Space>
 );
-const HackatonList = () => (
+const UserHackatonList = () => (
   <List
     itemLayout="vertical"
     size="large"
@@ -54,4 +54,4 @@ const HackatonList = () => (
     )}
   />
 );
-export default HackatonList;
+export default UserHackatonList;
