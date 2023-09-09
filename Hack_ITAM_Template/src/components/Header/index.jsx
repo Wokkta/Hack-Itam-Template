@@ -16,7 +16,7 @@ function Header() {
         <Link to="/test" style={{ padding: 5 }}>
           Test
         </Link>
-        <Link to="/user" style={{ padding: 5 }}>
+        <Link to="/user/12" style={{ padding: 5 }}>
           ЛК
         </Link>
         <Link to="/:id">12</Link>

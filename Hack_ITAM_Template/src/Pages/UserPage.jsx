@@ -15,6 +15,7 @@ import UserHackatonList from '../components/UserHackatonList';
 import TelegramIcon from '../assets/TelegramIcon.png';
 import VKIcon from '../assets/VKIcon.png';
 import MSTeamsIcon from '../assets/MSTeamsIcon.png';
+import HackatonsList from '../components/HackatonsList';
 const Sections = [
   {
     label: 'Хакатоны',
@@ -117,7 +118,7 @@ function UserPage() {
   ];
 
   const SectionsComponents = {
-    hackatons: <UserHackatonList />,
+    hackatons: <HackatonsList />,
     teams: <CommandsList />,
     achievements: <UserHackatonList />,
     statistics: (

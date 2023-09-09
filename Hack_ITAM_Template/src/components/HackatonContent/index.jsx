@@ -31,6 +31,7 @@ function HackatonContent({ data }) {
         <div style={{ maxWidth: '400px' }}>
           <Title level={2}>{data.title}</Title>
           <Divider />
+          <div></div>
           <List>
             <List.Item>
               <Text strong>Место проведения:</Text> {data.location}
