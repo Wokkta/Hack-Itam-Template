@@ -1,4 +1,4 @@
-import { Typography, List, Avatar, Divider } from 'antd';
+import { Typography, List, Divider } from 'antd';
 
 import GithubIcon from '../../assets/GithubIcon.png';
 import YoutubeIcon from '../../assets/YoutubeIcon.png';
@@ -82,6 +82,12 @@ function HackatonContent({ data }) {
                 )}
               </div>
             </List.Item>
+            <List.Item>
+              <Text strong>Ссылка на хакатон:</Text>{' '}
+              <a href={data.hackatonLink} target="_blank" rel="noreferrer">
+                {data.hackatonLink}
+              </a>
+            </List.Item>
           </List>
           <Divider />
           <div>
@@ -99,6 +105,7 @@ function HackatonContent({ data }) {
             <Text>{data.description}</Text>
           </div>
         </div>
+
         <img
           src={
             'https://static.tildacdn.com/tild3833-3838-4337-b635-666564323962/rlt_hack.png' ||

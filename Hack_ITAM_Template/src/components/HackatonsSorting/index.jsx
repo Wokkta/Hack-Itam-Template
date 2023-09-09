@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Select } from 'antd';
+import { Button, Select } from 'antd';
 
 import styles from './HackatonsSorting.module.sass';
 
@@ -139,6 +139,17 @@ const HackatonsSorting = () => {
           // Добавьте другие платформы по аналогии...
         ]}
       />
+      <Button
+        type="primary"
+        className="ant-btn-animate"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '20px',
+        }}>
+        Подать заявку в сборную
+      </Button>
     </div>
   );
 };

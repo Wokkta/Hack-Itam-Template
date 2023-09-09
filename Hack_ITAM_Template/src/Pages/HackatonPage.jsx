@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import NotFound from './NotFoundPage';
 import HackatonContent from '../components/HackatonContent';
+import { Button } from 'antd';
 function HackatonPage() {
   const { id } = useParams();
   const data = {
@@ -23,6 +24,15 @@ function HackatonPage() {
   return (
     <section>
       <div>{<HackatonContent id={id || ''} data={data} /> || <NotFound />}</div>
+      <div style={{ margin: ' 100px 50%' }}>
+        <Button
+          type="primary"
+          onClick={() => {
+            console.log('click');
+          }}>
+          Зарегистрироваться
+        </Button>
+      </div>
     </section>
   );
 }

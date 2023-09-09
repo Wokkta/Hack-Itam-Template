@@ -18,7 +18,8 @@ function Header() {
         </Link>
         <Link to="/user/12" style={{ padding: 5 }}>
           ЛК
-        </Link>
+        </Link>{' '}
+        /// change way
         <Link to="/:id">12</Link>
       </nav>
     </header>

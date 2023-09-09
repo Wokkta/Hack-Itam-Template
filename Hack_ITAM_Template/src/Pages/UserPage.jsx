@@ -16,6 +16,7 @@ import TelegramIcon from '../assets/TelegramIcon.png';
 import VKIcon from '../assets/VKIcon.png';
 import MSTeamsIcon from '../assets/MSTeamsIcon.png';
 import HackatonsList from '../components/HackatonsList';
+import { useDispatch, useSelector } from 'react-redux';
 const Sections = [
   {
     label: 'Хакатоны',
@@ -42,80 +43,7 @@ const Sections = [
 function UserPage() {
   const [current, setCurrent] = useState('hackatons');
   const { id } = useParams();
-  const Descriptions_items = [
-    {
-      label: 'Количество участий в хакатонах',
-      span: {
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 2,
-        xxl: 2,
-      },
-      children: '12',
-    },
-    {
-      label: 'User Id',
-      span: {
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 2,
-        xxl: 2,
-      },
-      children: `${id}`,
-    },
-    {
-      label: 'Роль(и)',
-      span: {
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 2,
-        xxl: 2,
-      },
-      children: 'backend developer, frontend developer',
-    },
-    {
-      label: 'Используемые технологии',
-      span: {
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 2,
-        xxl: 2,
-      },
-      children: 'JavaScript, HTML, CSS, Node.js, React',
-    },
-    {
-      label: 'Используемые языки программирования',
-      span: {
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 2,
-        xxl: 2,
-      },
-      children: 'JavaScript, HTML, CSS',
-    },
-    {
-      label: 'Количество созданных материалов',
-      span: {
-        xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 2,
-        xxl: 2,
-      },
-      children: '50',
-    },
-  ];
+  const user = useSelector((state) => state.user);
 
   const SectionsComponents = {
     hackatons: <HackatonsList />,
@@ -133,29 +61,17 @@ function UserPage() {
           xl: 4,
           xxl: 4,
         }}
-        items={Descriptions_items}
+        items={user.Descriptions_items}
       />
     ),
   };
 
-  const data = {
-    url: '',
-    fio: ' Антонио Бандерас',
-    username: 'Zorro',
-    portfolio: 'https://example.com/portfolio',
-    media: {
-      microsoftTeams: 'https://microsoft.com',
-      telegram: 'https://telegram',
-      vk: 'https://vk.com',
-    },
-  }; /// Заменить на норм дату
-
   const handleChangeCategory = (e) => {
     console.log('click ', e);
-    setCurrent(e.key);
+    setCurrent(e.key); //// заменить на норм обработку
   };
   const handleOpenPortfolio = () => {
-    window.open(data?.portfolio, '_blank');
+    window.open(user?.portfolio, '_blank');
   };
   return (
     <section
@@ -174,8 +90,8 @@ function UserPage() {
           width: '400px',
           flexWrap: 'wrap',
         }}>
-        {data.url ? (
-          <Avatar size={100} src={<img src={data.url} alt="avatar" />} />
+        {user.url ? (
+          <Avatar size={100} src={<img src={user.url} alt="avatar" />} />
         ) : (
           <Avatar size={100} icon={<AntDesignOutlined />} />
         )}
@@ -187,8 +103,8 @@ function UserPage() {
             justifyContent: 'space-around',
             marginLeft: '10px',
           }}>
-          <Title>{data?.username}</Title>
-          <Text level={2}>{data?.fio}</Text>
+          <Title>{user?.username}</Title>
+          <Text level={2}>{user?.fio}</Text>
 
           <div
             style={{
@@ -199,13 +115,13 @@ function UserPage() {
               gap: '10px',
               marginTop: '20px',
             }}>
-            {data?.media?.telegram && (
-              <a href={data.telegram}>
+            {user?.media?.telegram && (
+              <a href={user.telegram}>
                 <img src={TelegramIcon} alt="Telegram" style={{ width: '30px', height: '30px' }} />
               </a>
             )}
-            {data?.media?.microsoftTeams && (
-              <a href={data.microsoftTeams}>
+            {user?.media?.microsoftTeams && (
+              <a href={user.microsoftTeams}>
                 <img
                   src={MSTeamsIcon}
                   alt="Microsoft Teams"
@@ -213,8 +129,8 @@ function UserPage() {
                 />
               </a>
             )}
-            {data?.media?.vk && (
-              <a href={data.vk}>
+            {user?.media?.vk && (
+              <a href={user.vk}>
                 <img src={VKIcon} alt="VK" style={{ width: '30px', height: '30px' }} />
               </a>
             )}

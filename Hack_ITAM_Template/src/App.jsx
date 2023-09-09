@@ -8,20 +8,14 @@ import UsefullMaterialsPage from './Pages/UsefullMaterials';
 import HackatonPage from './Pages/HackatonPage';
 import CommandPage from './Pages/CommandPage';
 import RegistrationPage from './Pages/RegistrationPage';
+import MainPage from './Pages/MainPage';
 
 function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <h1>here was Wokka</h1>
-              </>
-            }
-          />
+          <Route path="/" element={<MainPage />} />
           <Route path="/test" element={<RegistrationPage />} />
           <Route path="/hackatons/" element={<HackatonsPage />} />
           <Route path="/hackatons/:id" element={<HackatonPage />} />
