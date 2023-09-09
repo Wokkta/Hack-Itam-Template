@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Avatar, Menu } from 'antd';
+import { Avatar, Button, Menu } from 'antd';
 import {
   CommentOutlined,
   AntDesignOutlined,
@@ -35,15 +35,10 @@ const Sections = [
     icon: <RadarChartOutlined />,
   },
 ];
-const SectionsComponents = {
-  hackatons: <UserHackatonList />,
-  teams: <CommandsList />,
-  achievements: <UserHackatonList />,
-};
+
 function UserPage() {
   const [current, setCurrent] = useState('hackatons');
   const { id } = useParams();
-
   const Descriptions_items = [
     {
       label: 'Количество участий в хакатонах',
@@ -79,44 +74,75 @@ function UserPage() {
         xl: 2,
         xxl: 2,
       },
-      children: 'backend developer , frontend developer',
+      children: 'backend developer, frontend developer',
     },
   ];
-  const data = false;
+
+  const SectionsComponents = {
+    hackatons: <UserHackatonList />,
+    teams: <CommandsList />,
+    achievements: <UserHackatonList />,
+    statistics: (
+      <Descriptions
+        title=""
+        bordered
+        column={{
+          xs: 1,
+          sm: 2,
+          md: 3,
+          lg: 3,
+          xl: 4,
+          xxl: 4,
+        }}
+        items={Descriptions_items}
+      />
+    ),
+  };
+
+  const data = {
+    url: '',
+    fio: ' Антонио Бандерас',
+    username: 'Zorro',
+    portfolio: 'https://example.com/portfolio',
+  }; /// Заменить на норм дату
 
   const handleChangeCategory = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
   };
-
+  const handleOpenPortfolio = () => {
+    window.open(data?.portfolio, '_blank');
+  };
   return (
     <section>
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '80vw' }}>
-        {data ? (
-          <Avatar
-            size={{ xs: 100, sm: 100, md: 100, lg: 100, xl: 100, xxl: 100 }}
-            src={<img src={data.url} alt="avatar" />}
-          />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          width: '80vw',
+        }}>
+        {data.url ? (
+          <Avatar size={100} src={<img src={data.url} alt="avatar" />} />
         ) : (
-          <Avatar
-            size={{ xs: 100, sm: 100, md: 100, lg: 100, xl: 100, xxl: 100 }}
-            icon={<AntDesignOutlined />}
-          />
+          <Avatar size={100} icon={<AntDesignOutlined />} />
         )}
-
-        <Descriptions
-          title=""
-          bordered
-          column={{
-            xs: 1,
-            sm: 2,
-            md: 3,
-            lg: 3,
-            xl: 4,
-            xxl: 4,
-          }}
-          items={Descriptions_items}
-        />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'space-around',
+            marginLeft: '10px',
+          }}>
+          <span>{data?.username}</span>
+          <span>{data?.fio}</span>
+          <div style={{ width: '150px' }}>
+            <Button type="primary" onClick={handleOpenPortfolio} style={{ marginTop: '10px' }}>
+              Резюме
+            </Button>
+          </div>
+        </div>
       </div>
 
       <div

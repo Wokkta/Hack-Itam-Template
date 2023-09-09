@@ -4,6 +4,7 @@ import NotFound from './Pages/NotFoundPage';
 import Layout from './components/Layout';
 import UserPage from './Pages/UserPage';
 import Hackatons from './Pages/Hackatons';
+import UsefullMaterialsPage from './Pages/UsefullMaterials';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/hackatons/" element={<Hackatons />} />
           <Route path="/hackatons/:id" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/Materials" element={<UsefullMaterialsPage />} />
           <Route path="/user/:id" element={<UserPage />} />
         </Routes>
       </Layout>

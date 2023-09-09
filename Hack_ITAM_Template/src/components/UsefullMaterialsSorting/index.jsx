@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Select } from 'antd';
 
-import styles from './HackatonsSorting.module.sass';
+import styles from './UsefullMaterialsSorting.module.sass';
 
-const HackatonsSorting = () => {
+const UsefullMaterialsSorting = () => {
   const [queryString, setQueryString] = useState(''); // Хранение строки запроса
   const [category, setCategory] = useState();
   const [platform, setPlatform] = useState();
@@ -54,45 +54,14 @@ const HackatonsSorting = () => {
         }
         options={[
           {
-            value: 'ds/ml/dl',
-            label: 'DS/ML/DL',
+            value: 'hackathon1',
+            label: 'Хакатон 1',
           },
           {
-            value: 'front',
-            label: 'Frontend Developer',
+            value: 'hackathon2',
+            label: 'Хакатон 2',
           },
-          {
-            value: 'back',
-            label: 'Backend Developer',
-          },
-          {
-            value: 'fullstack',
-            label: 'Full Stack Developer',
-          },
-          {
-            value: 'design',
-            label: 'Designer',
-          },
-          {
-            value: 'ctf',
-            label: 'CTF',
-          },
-          {
-            value: 'product',
-            label: 'Product/Project Manager',
-          },
-          {
-            value: 'analysts',
-            label: 'Analysts and Marketers',
-          },
-          {
-            value: 'gamedev',
-            label: 'Game Developer',
-          },
-          {
-            value: 'robotics',
-            label: 'Robotics',
-          },
+          // Добавьте другие хакатоны по аналогии...
         ]}
       />
 
@@ -143,4 +112,4 @@ const HackatonsSorting = () => {
   );
 };
 
-export default HackatonsSorting;
+export default UsefullMaterialsSorting;
