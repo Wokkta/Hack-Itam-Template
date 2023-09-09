@@ -1,4 +1,4 @@
-import { List, Typography, Spin } from 'antd';
+import { List, Typography, Spin, Card } from 'antd';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -114,10 +114,11 @@ function HackatonsList() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
   return (
     <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <List
-        itemLayout="vertical"
+        grid={{ gutter: 16, column: 4 }}
         dataSource={paginatedData}
         pagination={{
           onChange: handlePageChange,
@@ -127,37 +128,34 @@ function HackatonsList() {
           align: 'center',
         }}
         renderItem={(item) => (
-          <Link to={`/hackatons/${item.id}`}>
-            <List.Item
-              key={item.title}
-              style={{ height: '200px', width: '1200px' }}
-              extra={
-                item.photo && (
+          <List.Item>
+            <Link to={`/hackatons/${item.id}`}>
+              <Card
+                hoverable
+                style={{ width: 400 }}
+                cover={
                   <img
-                    src={item.photo}
                     alt={item.title}
-                    style={{ height: '100%', objectFit: 'cover', width: '200px' }}
+                    src={item.photo}
+                    style={{ height: 200, objectFit: 'cover' }}
                   />
-                )
-              }>
-              <Title level={4}>{item.title}</Title>
-              <Text strong>Даты проведения: </Text>
-              <Text>{item.dates.проведения}</Text>
-              <br />
-              <Text strong>Даты регистрации: </Text>
-              <Text>{item.dates.регистрации}</Text>
-              <br />
-              <Text strong>Формат: </Text>
-              <Text>{item.format}</Text>
-              <br />
-              <Text strong>Место проведения: </Text>
-              <Text>{item.location}</Text>
-              <br />
-              <Text strong>
-                {item.registrationOpen ? 'Регистрация открыта' : 'Регистрация закрыта'}{' '}
-              </Text>
-            </List.Item>
-          </Link>
+                }>
+                <Card.Meta title={item.title} description={`Место проведения: ${item.location}`} />
+                <Text strong>Даты проведения: </Text>
+                <Text>{item.dates.проведения}</Text>
+                <br />
+                <Text strong>Даты регистрации: </Text>
+                <Text>{item.dates.регистрации}</Text>
+                <br />
+                <Text strong>Формат: </Text>
+                <Text>{item.format}</Text>
+                <br />
+                <Text strong>
+                  {item.registrationOpen ? 'Регистрация открыта' : 'Регистрация закрыта'}{' '}
+                </Text>
+              </Card>
+            </Link>
+          </List.Item>
         )}
       />
       {loading && (

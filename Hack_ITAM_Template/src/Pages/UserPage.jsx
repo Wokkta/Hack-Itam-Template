@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Avatar, Button, Menu } from 'antd';
+import { Typography, Avatar, Button, Menu } from 'antd';
 import {
   CommentOutlined,
   AntDesignOutlined,
@@ -9,10 +9,12 @@ import {
 } from '@ant-design/icons';
 import { Descriptions } from 'antd';
 import { useParams } from 'react-router-dom';
-
+const { Title, Text } = Typography;
 import CommandsList from '../components/commandsList';
 import UserHackatonList from '../components/UserHackatonList';
-
+import TelegramIcon from '../assets/TelegramIcon.png';
+import VKIcon from '../assets/VKIcon.png';
+import MSTeamsIcon from '../assets/MSTeamsIcon.png';
 const Sections = [
   {
     label: 'Хакатоны',
@@ -76,6 +78,42 @@ function UserPage() {
       },
       children: 'backend developer, frontend developer',
     },
+    {
+      label: 'Используемые технологии',
+      span: {
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 2,
+        xxl: 2,
+      },
+      children: 'JavaScript, HTML, CSS, Node.js, React',
+    },
+    {
+      label: 'Используемые языки программирования',
+      span: {
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 2,
+        xxl: 2,
+      },
+      children: 'JavaScript, HTML, CSS',
+    },
+    {
+      label: 'Количество созданных материалов',
+      span: {
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 2,
+        xxl: 2,
+      },
+      children: '50',
+    },
   ];
 
   const SectionsComponents = {
@@ -104,6 +142,11 @@ function UserPage() {
     fio: ' Антонио Бандерас',
     username: 'Zorro',
     portfolio: 'https://example.com/portfolio',
+    media: {
+      microsoftTeams: 'https://microsoft.com',
+      telegram: 'https://telegram',
+      vk: 'https://vk.com',
+    },
   }; /// Заменить на норм дату
 
   const handleChangeCategory = (e) => {
@@ -114,13 +157,21 @@ function UserPage() {
     window.open(data?.portfolio, '_blank');
   };
   return (
-    <section>
+    <section
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        width: '100vw',
+        paddingLeft: '10%',
+      }}>
       <div
         style={{
           display: 'flex',
-          justifyContent: 'flex-start',
+          justifyContent: 'space-around',
           alignItems: 'center',
-          width: '80vw',
+          width: '400px',
+          flexWrap: 'wrap',
         }}>
         {data.url ? (
           <Avatar size={100} src={<img src={data.url} alt="avatar" />} />
@@ -135,10 +186,38 @@ function UserPage() {
             justifyContent: 'space-around',
             marginLeft: '10px',
           }}>
-          <span>{data?.username}</span>
-          <span>{data?.fio}</span>
-          <div style={{ width: '150px' }}>
-            <Button type="primary" onClick={handleOpenPortfolio} style={{ marginTop: '10px' }}>
+          <Title>{data?.username}</Title>
+          <Text level={2}>{data?.fio}</Text>
+
+          <div
+            style={{
+              minWidth: '150px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '10px',
+              marginTop: '20px',
+            }}>
+            {data?.media?.telegram && (
+              <a href={data.telegram}>
+                <img src={TelegramIcon} alt="Telegram" style={{ width: '30px', height: '30px' }} />
+              </a>
+            )}
+            {data?.media?.microsoftTeams && (
+              <a href={data.microsoftTeams}>
+                <img
+                  src={MSTeamsIcon}
+                  alt="Microsoft Teams"
+                  style={{ width: '30px', height: '30px' }}
+                />
+              </a>
+            )}
+            {data?.media?.vk && (
+              <a href={data.vk}>
+                <img src={VKIcon} alt="VK" style={{ width: '30px', height: '30px' }} />
+              </a>
+            )}
+            <Button type="primary" onClick={handleOpenPortfolio}>
               Резюме
             </Button>
           </div>

@@ -1,7 +1,7 @@
 import HackatonsList from '../components/HackatonsList';
 import HackatonsSorting from '../components/HackatonsSorting';
 
-function Hackatons() {
+function HackatonsPage() {
   return (
     <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <HackatonsSorting />
@@ -10,4 +10,4 @@ function Hackatons() {
   );
 }
 
-export default Hackatons;
+export default HackatonsPage;

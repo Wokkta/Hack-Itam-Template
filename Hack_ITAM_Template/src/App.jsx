@@ -3,8 +3,9 @@ import './App.css';
 import NotFound from './Pages/NotFoundPage';
 import Layout from './components/Layout';
 import UserPage from './Pages/UserPage';
-import Hackatons from './Pages/Hackatons';
+import HackatonsPage from './Pages/HackatonsPage';
 import UsefullMaterialsPage from './Pages/UsefullMaterials';
+import HackatonPage from './Pages/HackatonPage';
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
             }
           />
           <Route path="/test" element={<h1> There`s something testing</h1>} />
-          <Route path="/hackatons/" element={<Hackatons />} />
-          <Route path="/hackatons/:id" element={<NotFound />} />
+          <Route path="/hackatons/" element={<HackatonsPage />} />
+          <Route path="/hackatons/:id" element={<HackatonPage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/Materials" element={<UsefullMaterialsPage />} />
           <Route path="/user/:id" element={<UserPage />} />
