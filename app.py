@@ -1,12 +1,18 @@
-from typing import Callable
-from starlette import Starlette
-from myfastapi.routing import ApiRouter
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from presentation.web.router import router
 
 
-class FastApi(Starlette):
-    def __init__(
-        self,
-        version: str = "0.1.0"
-    ) -> None:
-        self.version = version
-	self.router: APIRouter = APIRouter()
+def create_app() -> FastAPI:
+    fastapi_app = FastAPI()
+
+    fastapi_app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    fastapi_app.include_router(router)
+    return fastapi_app
