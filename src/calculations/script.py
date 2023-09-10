@@ -19,22 +19,22 @@ def add_data(table_name, data):
 
 
 # Функция для удаления данных из таблицы по условию
-def delete_data(table_name, condition_column, condition_value):
-    delete_query = f"DELETE FROM {table_name} WHERE {condition_column} = %s"
-    cursor.execute(delete_query, (condition_value,))
+def delete_data(table_name, column_name, value):
+    delete_query = f"DELETE FROM {table_name} WHERE {column_name} = %s"
+    cursor.execute(delete_query, (value,))
     connection.commit()
 
 
 # Функция для обновления данных в таблице по условию
-def update_data(table_name, data, condition_column, condition_value):
-    update_query = f"UPDATE {table_name} SET {', '.join([f'{key} = %s' for key in data.keys()])} WHERE {condition_column} = %s"
-    cursor.execute(update_query, list(data.values()) + [condition_value])
+def update_data(table_name, data, column_name, value):
+    update_query = f"UPDATE {table_name} SET {', '.join([f'{key} = %s' for key in data.keys()])} WHERE {column_name} = %s"
+    cursor.execute(update_query, list(data.values()) + [value])
     connection.commit()
 
 
 # Функция для извлечения всех данных из таблицы и возврата в формате JSON
-def get_data(table_name: str, data: str): # how to send set of columns to argument for funcition
-    select_query = f"SELECT {data} FROM {table_name}"
+def get_all_data(table_name):
+    select_query = f"SELECT * FROM {table_name}"
     cursor.execute(select_query)
     data = cursor.fetchall()
 
