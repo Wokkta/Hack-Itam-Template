@@ -2,7 +2,6 @@ import datetime
 import sys
 import os
 
-# надо как-то добавить путь к script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 script_path = os.path.join(script_dir, "stats.py")
 
