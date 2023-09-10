@@ -217,7 +217,6 @@ catalog_data = []
 for i in range(20):
     url = f"https://example.com/hackathon_{i + 1}"
     inner_link = random.choice([True, False])
-    type_tag = random.choice(["Тип 1", "Тип 2", "Тип 3"])
     interests = ", ".join(random.sample(interests, random.randint(1, len(interests))))
     created_by = f"Организатор {i + 1}"
     user_tags = random.sample(tags, random.randint(1, len(tags)))
@@ -229,7 +228,7 @@ for i in range(20):
     catalog_entry = {
         "url": url,
         "inner_link": inner_link,
-        "type_tag": type_tag,
+        "status": random.choice(["Accepted", "Denied", "Pending"])
         "interests": interests,
         "created_by": created_by,
         "description": description,
@@ -242,8 +241,8 @@ for i in range(20):
 # Вставка данных в таблицу "catalog"
 for catalog_entry in catalog_data:
     cur.execute(
-        "INSERT INTO cataloge (url, inner_link,  tag, interests, created_by, description, link, create_date) "
-        "VALUES (%(url)s, %(inner_link)s, %(tag)s, %(interests)s, %(created_by)s, %(description)s, %(link)s, %(create_date)s)",
+        "INSERT INTO cataloge (url, inner_link, status, tag, interests, created_by, description, link, create_date) "
+        "VALUES (%(url)s, %(inner_link)s, %(status)s, %(tag)s, %(interests)s, %(created_by)s, %(description)s, %(link)s, %(create_date)s)",
         catalog_entry
     )
 # Коммит изменений
