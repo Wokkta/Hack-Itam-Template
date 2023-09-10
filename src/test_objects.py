@@ -1,5 +1,9 @@
 # create get endpoint for list of social nets
-social_networks = {"telegram": "@creamsoda0", "vk": "nitumisis", "github": "su-mrak"}
+social_networks = {
+    "telegram": "@creamsoda0",
+    "vk": "nitumisis",
+    "github": "su-mrak"
+}
 
 # create get endpoint for list of default stack
 stack = (

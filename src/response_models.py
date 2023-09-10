@@ -20,8 +20,8 @@ class TeamInfoResponse(BaseModel):
     id: int = Field(..., example=1)
     team_name: str = Field(..., example="BelieveX")
     members: list[str] = Field(
-        ..., example=["teadove", "chiki"]
-    )  # usernames, no captain, only other members
+        ..., example=["teadove",
+                      "chiki"])  # usernames, no captain, only other members
     capitan: int = Field(..., example=1)  # take user id who created team
     image: bytes | None = None
     description: str | None = None
@@ -33,19 +33,16 @@ class HackInfoResponse(BaseModel):
     website_link: str = Field(..., example="https://leaders2023.innoagency.ru/")
     registration_link: str | None = Field(example=None)
     registration_started_at: datetime | None = Field(
-        ..., example=datetime(2023, 4, 23, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 4, 23, 00, 00, 00, 0))
     registration_ended_at: datetime = Field(
-        ..., example=datetime(2023, 6, 23, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 6, 23, 00, 00, 00, 0))
     event_started_at: datetime | None = Field(
-        ..., example=datetime(2023, 10, 18, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 10, 18, 00, 00, 00, 0))
     event_ended_at: datetime | None = Field(
-        ..., example=datetime(2023, 10, 21, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 10, 21, 00, 00, 00, 0))
     format: str = Field(..., example="online")
-    city: str | None = Field(..., example="Moscow")  # can be more than one city ???
+    city: str | None = Field(...,
+                             example="Moscow")  # can be more than one city ???
     prize: str | None = Field(..., example="$1000")
     team_members_number_min: int | None = Field(..., example=2)
     team_members_number_max: int = Field(..., example=5)
@@ -61,8 +58,8 @@ class PublicationInfoResponse(BaseModel):
     publication_type: str = Field(..., example="title")
     tags: set[str] | None = Field(..., example=("design",))
     created_by: int = Field(..., example=42)
-    created_at: datetime = Field(
+    created_at: datetime = Field(...,
+                                 example=datetime(2022, 10, 21, 00, 00, 00, 0))
+    description: str = Field(
         ...,
-        example=datetime(2022, 10, 21, 00, 00, 00, 0)
-    )
-    description: str = Field(..., example="What can we do to make great layout ASAP? Read the article")
+        example="What can we do to make great layout ASAP? Read the article")

@@ -1,8 +1,9 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field
-from test_objects import *
 
+from pydantic import BaseModel, Field
+from pydantic.fields import Field
+from test_objects import *
 
 # REQUEST MODELS:
 # # add model_config to generate schema
@@ -17,7 +18,8 @@ class UserCreateRequest(BaseModel):
     stack: set[str] | None = Field(..., example=stack)
     tags: set[str] = Field(default=[], example=tags)
     image: bytes | None = None
-    description: str | None = Field(..., example="I wish u best but I'm the best.")
+    description: str | None = Field(...,
+                                    example="I wish u best but I'm the best.")
 
 
 class TeamCreateRequest(BaseModel):
@@ -39,19 +41,16 @@ class HackCreateRequest(BaseModel):
     website_link: str
     registration_link: str
     registration_started_at: datetime | None = Field(
-        ..., example=datetime(2023, 4, 23, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 4, 23, 00, 00, 00, 0))
     registration_ended_at: datetime = Field(
-        ..., example=datetime(2023, 6, 23, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 6, 23, 00, 00, 00, 0))
     event_started_at: datetime | None = Field(
-        ..., example=datetime(2023, 10, 18, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 10, 18, 00, 00, 00, 0))
     event_ended_at: datetime | None = Field(
-        ..., example=datetime(2023, 10, 21, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2023, 10, 21, 00, 00, 00, 0))
     format: str = Field(..., example="online")
-    city: str | None = Field(..., example="Moscow")  # can be more than one city ???
+    city: str | None = Field(...,
+                             example="Moscow")  # can be more than one city ???
     prize: str
     team_members_number_min: int | None = Field(..., example=2)
     team_members_number_max: int = Field(..., example=5)
@@ -62,7 +61,8 @@ class HackCreateRequest(BaseModel):
             "backend",
         ),
     )
-    description: str = Field(..., example="cool description")  # @su-mrak add annotated
+    description: str = Field(
+        ..., example="cool description")  # @su-mrak add annotated
 
 
 class PublicationCreateRequest(BaseModel):
@@ -73,6 +73,5 @@ class PublicationCreateRequest(BaseModel):
     tags: set[str] | None = Field(..., example=("ml",))
     created_by: int = Field(..., example=42)
     created_at: datetime | None = Field(
-        ..., example=datetime(2022, 10, 21, 00, 00, 00, 0)
-    )
+        ..., example=datetime(2022, 10, 21, 00, 00, 00, 0))
     description: str = Field(..., example="cool description")
