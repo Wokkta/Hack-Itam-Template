@@ -45,6 +45,14 @@ def get_all_data(table_name):
         data_json.append(row_dict)
 
     return json.dumps(data_json)
+    
+def check_user_in_db(mail: str, password: str):
+    query = """
+    SELECT COUNT(*) FROM users WHERE mail = %s AND password = %s
+    """
+    cursor.execute(query, (mail, password))
+    result = cursor.fetchone()[0]
+    return result == 1    
 
 # data_to_insert = {
 #     "name": "John",
