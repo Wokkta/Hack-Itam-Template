@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Select } from 'antd';
+import { Button, Form, Radio, Select } from 'antd';
 
 import styles from './HackatonsSorting.module.sass';
 import ModalFormAssemblies from '../UI/Forms/Modal/ModalFormJoinAssemblies';
@@ -14,8 +14,8 @@ const initialFieldsData = {
   institute: '',
   direction: '',
   group: '',
-  coverLetter: '', // Добавлено сопроводительное письмо
-  selectedPositions: [], // Выбранные позиции
+  coverLetter: '',
+  selectedPositions: [],
   skills: '',
   teamRoles: [],
   languages: [],
@@ -34,12 +34,16 @@ const HackatonsSorting = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [fieldsData, setFieldData] = useState(initialFieldsData);
+
   const [form] = Form.useForm();
   useEffect(() => {
     console.log(formData, 'formData');
   }, formData);
   const showModal = () => {
     setIsModalVisible(true);
+  };
+  const handleOptionChange = (e) => {
+    console.log(`radio checked:${e.target.value}`);
   };
 
   const handleOk = () => {
@@ -65,7 +69,16 @@ const HackatonsSorting = () => {
         showSearch
         placeholder="Select category"
         optionFilterProp="children">
-        {/* Options go here */}
+        <Option value="ds/ml/dl">DS/ML/DL</Option>
+        <Option value="front">Front-end</Option>
+        <Option value="back">Back-end</Option>
+        <Option value="fullstack">Full-stack</Option>
+        <Option value="design">Design</Option>
+        <Option value="ctf">CTF</Option>
+        <Option value="product">Product/Project Manager</Option>
+        <Option value="analysts">Analysts and Marketers</Option>
+        <Option value="gamedev">Game Development</Option>
+        <Option value="robotics">Robotics</Option>
       </Select>
 
       <Select
@@ -83,7 +96,10 @@ const HackatonsSorting = () => {
         optionFilterProp="children">
         {/* Options go here */}
       </Select>
-
+      <Radio.Group onChange={handleOptionChange} defaultValue="a">
+        <Radio.Button value="recommended">Рекомендованные</Radio.Button>
+        <Radio.Button value="registrationOpen">Открыта регистрация</Radio.Button>
+      </Radio.Group>
       <Button
         type="primary"
         className="ant-btn-animate"

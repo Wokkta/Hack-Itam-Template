@@ -1,9 +1,31 @@
 import { useParams } from 'react-router-dom';
 import NotFound from './NotFoundPage';
+import React, { useState } from 'react';
+import { Modal, Form, Input, Select, Switch, Button, notification } from 'antd';
+
+const { Option } = Select;
 import HackatonContent from '../components/HackatonContent';
-import { Button } from 'antd';
-function HackatonPage() {
+
+const HackatonPage = () => {
+  const [visible, setVisible] = useState(false);
   const { id } = useParams();
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOk = (values) => {
+    console.log('Form values:', values);
+    setVisible(false);
+    notification.success({
+      message: 'Заявка на хакатон отправлена',
+      description: 'Ваша заявка отправлена на рассмотрение.',
+    });
+  };
   const data = {
     title: 'Хакатон 1',
     location: 'Москва',
@@ -24,17 +46,86 @@ function HackatonPage() {
   return (
     <section>
       <div>{<HackatonContent id={id || ''} data={data} /> || <NotFound />}</div>
-      <div style={{ margin: ' 100px 50%' }}>
-        <Button
-          type="primary"
-          onClick={() => {
-            console.log('click');
-          }}>
+      <div style={{ margin: '100px 50%' }}>
+        <Button type="primary" onClick={showModal}>
           Зарегистрироваться
         </Button>
       </div>
+
+      <RegistrationModal visible={visible} onCancel={handleCancel} onOk={handleOk} />
     </section>
   );
-}
+};
 
 export default HackatonPage;
+
+const RegistrationModal = ({ visible, onCancel, onOk }) => {
+  const [form] = Form.useForm();
+  const [userLeads] = useState(['Вариант 1', 'Вариант 2', 'Вариант 3']);
+  const [user, setUser] = useState(null);
+
+  const handleUserChange = (checked) => {
+    setUser(checked ? 'user' : null);
+  };
+
+  const handleOk = () => {
+    form.validateFields().then((values) => {
+      onOk(values);
+      form.resetFields();
+    });
+  };
+
+  return (
+    <Modal title="Регистрация" open={visible} onOk={handleOk} onCancel={onCancel} width={1000}>
+      <Form form={form}>
+        {user?.userLeads && (
+          <Form.Item label="От команды">
+            <Select>
+              {user.userLeads.map((option) => (
+                <Option key={option} value={option}>
+                  {option}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        )}
+
+        <Form.Item label="Зарегистрироваться самому">
+          <Switch onChange={handleUserChange} />
+        </Form.Item>
+
+        {user && (
+          <>
+            <Form.Item
+              label="ФИО"
+              name="name"
+              rules={[{ required: true, message: 'Введите ваше ФИО' }]}>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Контакты"
+              name="contacts"
+              rules={[{ required: true, message: 'Введите ваши контакты' }]}>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Роль"
+              name="role"
+              rules={[{ required: true, message: 'Введите вашу роль' }]}>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Стек"
+              name="stack"
+              rules={[{ required: true, message: 'Введите ваш стек' }]}>
+              <Input />
+            </Form.Item>
+          </>
+        )}
+      </Form>
+    </Modal>
+  );
+};
