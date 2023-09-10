@@ -1,23 +1,25 @@
 from fastapi import APIRouter, Query, Path, Header, HTTPException, status
 from starlette.responses import JSONResponse
-from models import User
 import requests
 
 
+from creating_models import UserCreateRequest
+from response_models import UserInfoResponse
+
+
 # create app
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/api-users")
 
-# List of endpoints:
-#   1. user endpoints
-#   2. team endpoints
-#   3. hacks endpoints
-#   4. catalog endpoints
 
-# 1. user endpoints
+@router.post("/")
+async def create_user(item: UserCreateRequest):
+    input = item.model_dump()
+    output = UserInfoResponse(input)
+    return output
 
 
 @router.get("/{item_id}")
-async def general_user_info(item_id: int):
+async def read_user_info(item_id: int, response_model=UserInfoResponse):
     url = f"http://api.example.com/users/{item_id}"
 
     response = requests.get(url)
@@ -44,11 +46,6 @@ async def general_user_info(item_id: int):
 @router.get("/{item_id}/stats")
 async def user_stats(item_id: int = Path(..., example="999")):
     return {"id": item_id}
-
-
-@router.post("/")
-async def create_user(item: User):
-    return item
 
 
 @router.post("/query")
