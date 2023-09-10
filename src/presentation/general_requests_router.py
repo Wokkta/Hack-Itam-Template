@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from typing import List
 import sys
 import os
-from ..script import *
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 script_path = os.path.join(script_dir, "script.py")
@@ -15,7 +14,8 @@ from script import (
     add_data,
     delete_data,
     update_data,
-    get_all_data
+    get_all_data,
+    check_user_in_db
 )
 
 app = FastAPI()
@@ -44,3 +44,13 @@ async def update_item(table_name: str, column_name: list, value: list, item: Ite
 async def get_all_items(table_name: str):
     items = get_all_data(table_name)
     return items
+
+@app.get('/auth')
+async def auth_user(mail: str, password: str):
+    user_exists = check_user_in_db(mail, password)
+    if user_exists:
+        return {"message": "User authorized"}
+    else:
+        raise HTTPException(status_code=401, detail="Authentication failed")
+
+
