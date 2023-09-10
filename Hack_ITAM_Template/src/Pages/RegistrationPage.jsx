@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 function RegistrationPage() {
   const [step, setStep] = useState(1);
@@ -170,7 +171,7 @@ function RegistrationPage() {
 
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Register
+                <Link to={`/user/${12}`}>Register</Link>
               </Button>
             </Form.Item>
           </>
