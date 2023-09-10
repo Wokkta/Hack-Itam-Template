@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List
 import sys
 import os
-from script import *
+from ..script import *
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 script_path = os.path.join(script_dir, "script.py")
