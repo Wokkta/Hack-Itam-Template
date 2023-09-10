@@ -33,8 +33,8 @@ def update_data(table_name, data, condition_column, condition_value):
 
 
 # Функция для извлечения всех данных из таблицы и возврата в формате JSON
-def get_all_data(table_name):
-    select_query = f"SELECT * FROM {table_name}"
+def get_data(table_name: str, data: str): # how to send set of columns to argument for funcition
+    select_query = f"SELECT {data} FROM {table_name}"
     cursor.execute(select_query)
     data = cursor.fetchall()
 
