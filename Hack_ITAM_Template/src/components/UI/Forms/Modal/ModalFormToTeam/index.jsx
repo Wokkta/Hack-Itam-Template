@@ -3,10 +3,16 @@ import { Modal, Form, Input, Checkbox } from 'antd';
 
 const { TextArea } = Input;
 
-const ModalForm = ({ isVisible, onOk, onCancel, allProfessions }) => {
-  const [coverLetter, setCoverLetter] = useState('');
-  const [selectedPositions, setSelectedPositions] = useState([]);
-
+const ModalForm = ({
+  isVisible,
+  onOk,
+  onCancel,
+  allProfessions,
+  coverLetter,
+  setCoverLetter,
+  selectedPositions,
+  setSelectedPositions,
+}) => {
   const handlePositionChange = (selected) => {
     setSelectedPositions(selected);
   };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Card, Avatar, Button, Modal, Checkbox } from 'antd';
+import { useParams } from 'react-router-dom';
+import { Card, Avatar, Button, Modal, Checkbox, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import HackatonsList from '../components/HackatonsList';
 import Title from 'antd/es/typography/Title';
@@ -7,10 +8,9 @@ import { useSelector } from 'react-redux';
 import ModalForm from '../components/UI/Forms/Modal/ModalFormToTeam';
 
 const { Meta } = Card;
-const { Option } = Select;
 
 function CommandPage() {
-  const dispatch = useDispatch();
+  const { id } = useParams();
   const user = useSelector((state) => state.user);
 
   const teamName = 'Team Alpha';
@@ -49,6 +49,7 @@ function CommandPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [applicationStatus, setApplicationStatus] = useState(null);
   const [selectedPositions, setSelectedPositions] = useState([]);
+  const [coverLetter, setCoverLetter] = useState('');
 
   const showModal = (user) => {
     setSelectedUser(user);
@@ -80,7 +81,14 @@ function CommandPage() {
     setCoverLetter('');
     setSelectedPositions([]);
   };
-
+  const professions = users.reduce((acc, user) => {
+    user.professions.forEach((profession) => {
+      if (!acc.includes(profession)) {
+        acc.push(profession);
+      }
+    });
+    return acc;
+  }, []);
   const vacancies = allProfessions.filter((profession) => !professions.includes(profession));
 
   return (
@@ -128,6 +136,10 @@ function CommandPage() {
         onOk={handleOk}
         onCancel={handleCancel}
         allProfessions={allProfessions}
+        coverLetter={coverLetter}
+        setCoverLetter={setCoverLetter}
+        selectedPositions={selectedPositions}
+        setSelectedPositions={setSelectedPositions}
       />
 
       {applicationStatus === 'watching' && (
