@@ -1,0 +1,102 @@
+-- Создание таблицы "admins"
+CREATE TABLE admins (
+    admin_id serial PRIMARY KEY,
+    name varchar(30),
+    password text, 
+    admin_permission text[]
+);
+
+-- Создание таблицы "hacks"
+CREATE TABLE hacks (
+    hack_id serial PRIMARY KEY,
+    hack_name VARCHAR(40),
+    description text,
+	event_start TIMESTAMP WITH TIME ZONE,
+	event_end TIMESTAMP WITH TIME ZONE,
+	registration_start TIMESTAMP WITH TIME ZONE,
+	registration_end TIMESTAMP WITH TIME ZONE,
+    tag text[],
+    amount_of_people integer,
+    price numeric,
+    format varchar(20),
+    city varchar(20),
+	reg_link text,
+	main_link text
+);
+
+-- Создание таблицы "teams"
+CREATE TABLE teams (
+    team_id serial PRIMARY KEY,
+	name varchar(20),
+    image bytea,
+    division integer,
+    description text
+	
+);
+
+-- Создание таблицы "users"
+CREATE TABLE "users" (
+    user_id serial PRIMARY KEY,
+    image bytea,
+    password text,
+    name VARCHAR(40),
+    social_network text,
+    team_id integer REFERENCES team(team_id),
+    status text[], -- "Сборная", "Тимлид", "Участник команды"
+    feedback_id integer,
+    stack text,
+    description text,
+    github_link text,
+    tag text[]
+);
+
+-- Создание таблицы "feedback"
+CREATE TABLE feedback (
+    feedback_id serial PRIMARY KEY,
+    user_id integer REFERENCES "user"(user_id),
+    hack_id integer REFERENCES hack(hack_id),
+    comments text
+);
+
+-- Создание таблицы "team_statis"
+CREATE TABLE team_statis (
+    team_statis_id serial PRIMARY KEY,
+    hack_id integer REFERENCES hack(hack_id),
+    team_id integer REFERENCES team(team_id),
+    result varchar(20)
+);
+
+-- Создание таблицы "hack_comments"
+CREATE TABLE hack_comments (
+    hack_comments_id serial PRIMARY KEY,
+    hack_id integer REFERENCES hack(hack_id),
+    user_id integer REFERENCES "user"(user_id),
+    comments text
+);
+
+CREATE TABLE cataloge (
+    id serial PRIMARY KEY,
+    url text,
+    inner_link boolean,
+    type_tag text[],
+    interests text[],
+    created_by varchar(255),
+    description text,
+    link text,
+    create_date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE requests(
+    request_id serial PRIMARY KEY,
+    name varchar(30),
+	stack text[],
+	github_link text,
+	tag text[]
+	tg text,
+	team_id integer REFERENCES teams(team_id),
+    type VARCHAR(20) NOT NULL,  -- team/group/member/question
+    status VARCHAR(20) DEFAULT 'pending'
+	question TEXT,  -- Вопрос (для случая техподдержки)
+	job varchar(30),
+    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW()  -- Дата и время создания заявки
+);
