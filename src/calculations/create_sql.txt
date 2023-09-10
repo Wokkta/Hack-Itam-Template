@@ -1,4 +1,4 @@
--- Создание таблицы "admins"
+-- Создание таблицы "admin"
 CREATE TABLE admins (
     admin_id serial PRIMARY KEY,
     name varchar(30),
@@ -6,7 +6,7 @@ CREATE TABLE admins (
     admin_permission text[]
 );
 
--- Создание таблицы "hacks"
+-- Создание таблицы "hack"
 CREATE TABLE hacks (
     hack_id serial PRIMARY KEY,
     hack_name VARCHAR(40),
@@ -24,7 +24,7 @@ CREATE TABLE hacks (
 	main_link text
 );
 
--- Создание таблицы "teams"
+-- Создание таблицы "team"
 CREATE TABLE teams (
     team_id serial PRIMARY KEY,
 	name varchar(20),
@@ -34,7 +34,7 @@ CREATE TABLE teams (
 	
 );
 
--- Создание таблицы "users"
+-- Создание таблицы "user"
 CREATE TABLE "users" (
     user_id serial PRIMARY KEY,
     image bytea,
@@ -77,8 +77,9 @@ CREATE TABLE hack_comments (
 CREATE TABLE cataloge (
     id serial PRIMARY KEY,
     url text,
+	status varchar(30), --Accepted, Denied, Pending
     inner_link boolean,
-    type_tag text[],
+    tag text[],
     interests text[],
     created_by varchar(255),
     description text,
