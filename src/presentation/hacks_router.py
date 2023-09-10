@@ -2,29 +2,29 @@ from fastapi import APIRouter, Query, Path, Header, HTTPException, status, Respo
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from starlette.responses import JSONResponse
-import requests
 
-from creating_models import UserCreateRequest
-from response_models import UserInfoResponse
+from creating_models import HackCreateRequest
+from response_models import HackInfoResponse
+
 
 # create app
-router = APIRouter(prefix="/api-users")
+router = APIRouter(prefix="/api-hacks")
 
 
-@router.get("/{item_id}", response_model=UserInfoResponse)
+@router.get("/{item_id}", response_model=HackInfoResponse)
 async def read_item(item_id: int) -> Response:
     json_compatible_item_data = jsonable_encoder(Response)
     return JSONResponse(content=json_compatible_item_data)
 
 
 # @router.get("/{item_id}/stats")
-# async def user_stats(item_id: int = Path(..., example="999")) -> Response:
+# async def read_item(item_id: int = Path(..., example="999")) -> Response:
 #     return {"id": item_id}
 
 
-@router.post("/{item_id}", response_model=UserCreateRequest)
-async def create_item(item: UserCreateRequest) -> JSONResponse:
-    json_compatible_item_data = jsonable_encoder(UserCreateRequest)
+@router.post("/{item_id}", response_model=HackCreateRequest)
+async def create_item(item: HackCreateRequest) -> JSONResponse:
+    json_compatible_item_data = jsonable_encoder(HackCreateRequest)
     return JSONResponse(content=json_compatible_item_data)
 
 

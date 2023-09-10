@@ -5,7 +5,7 @@ connection = psycopg2.connect(
     host="your_host",
     database="your_database",
     user="your_user",
-    password="your_password"
+    password="your_password",
 )
 cursor = connection.cursor()
 
@@ -59,7 +59,7 @@ def update_user(user_id, updated_data):
 
 # Пример удаления пользователя по user_id
 def delete_user(user_id):
-    delete_query = "DELETE FROM \"user\" WHERE user_id = %s"
+    delete_query = 'DELETE FROM "user" WHERE user_id = %s'
     cursor.execute(delete_query, (user_id,))
     connection.commit()
 
@@ -242,11 +242,7 @@ def add_to_team_statis(team_id, hack_id, result):
     VALUES (%(team_id)s, %(hack_id)s, %(result)s)
     RETURNING team_statis_id
     """
-    team_statis_data = {
-        "team_id": team_id,
-        "hack_id": hack_id,
-        "result": result
-    }
+    team_statis_data = {"team_id": team_id, "hack_id": hack_id, "result": result}
     cursor.execute(insert_query, team_statis_data)
     team_statis_id = cursor.fetchone()[0]  # Получаем ID новой записи
     connection.commit()

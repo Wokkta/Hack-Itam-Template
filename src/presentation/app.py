@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from presentation import users_router
+from presentation import users_router, hacks_router, teams_router, publications_router
 
 
 def create_app() -> FastAPI:
@@ -14,4 +14,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     fastapi_app.include_router(users_router.router)
+    fastapi_app.include_router(teams_router.router)
+    fastapi_app.include_router(hacks_router.router)
+    fastapi_app.include_router(publications_router.router)
+
     return fastapi_app
