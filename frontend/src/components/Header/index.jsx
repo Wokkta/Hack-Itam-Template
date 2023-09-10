@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
+
 import styles from './Header.module.sass';
+import { Button } from 'antd';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 function Header() {
+  const userId = useSelector((state) => state.user.id);
+
   return (
     <header>
       <nav className={styles.content}>
@@ -13,12 +19,18 @@ function Header() {
         <Link to="/Hackatons" style={{ padding: 5 }}>
           Хакатоны
         </Link>
-        <Link to="/test" style={{ padding: 5 }}>
+        <Link to="/registration" style={{ padding: 5 }}>
           Test
         </Link>
-        <Link to="/user/12" style={{ padding: 5 }}>
-          ЛК
-        </Link>{' '}
+        {userId ? (
+          <Link to={`/user/${userId}`} style={{ padding: 5 }}>
+            <Button>ЛК</Button>
+          </Link>
+        ) : (
+          <Link to="/registration" style={{ padding: 5 }}>
+            <Button>ЛК</Button>
+          </Link>
+        )}
         /// change way
         <Link to="/:id">12</Link>
       </nav>

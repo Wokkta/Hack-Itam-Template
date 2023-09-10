@@ -6,44 +6,14 @@ import HackatonsList from '../components/HackatonsList';
 import Title from 'antd/es/typography/Title';
 import { useSelector } from 'react-redux';
 import ModalForm from '../components/UI/Forms/Modal/ModalFormToTeam';
+import useGetTeam from '../hooks/useGetTeam';
 
 const { Meta } = Card;
 
-function CommandPage() {
+const TeamPage = () => {
   const { id } = useParams();
   const user = useSelector((state) => state.user);
-
-  const teamName = 'Team Alpha';
-  const users = [
-    {
-      id: 1,
-      username: 'user1',
-      avatar: 'https://example.com/avatar1.jpg',
-      professions: ['Frontend Developer', 'Designer'],
-    },
-    {
-      id: 2,
-      username: 'user2',
-      avatar: 'https://example.com/avatar2.jpg',
-      professions: ['Backend Developer', 'Tester'],
-    },
-    {
-      id: 3,
-      username: 'user3',
-      avatar: 'https://example.com/avatar3.jpg',
-      professions: ['UI/UX Designer'],
-    },
-  ];
-
-  let allProfessions = [
-    'Frontend Developer',
-    'Backend Developer',
-    'UI/UX Designer',
-    'Designer',
-    'Tester',
-    'Mr BeerMan',
-    'Data Soyjack',
-  ];
+  const team = useGetTeam(id);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -81,15 +51,6 @@ function CommandPage() {
     setCoverLetter('');
     setSelectedPositions([]);
   };
-  const professions = users.reduce((acc, user) => {
-    user.professions.forEach((profession) => {
-      if (!acc.includes(profession)) {
-        acc.push(profession);
-      }
-    });
-    return acc;
-  }, []);
-  const vacancies = allProfessions.filter((profession) => !professions.includes(profession));
 
   return (
     <section
@@ -100,16 +61,16 @@ function CommandPage() {
         width: '100vw',
         paddingLeft: '10%',
       }}>
-      <h1>{teamName}</h1>
+      <h1>{team.team_name}</h1>
 
       <div>
-        {users.map((user) => (
+        {team.members.map((user) => (
           <div key={user.id}>
             <Link to={`/user/${user.id}`}>
               <Card style={{ width: 300, marginBottom: 16 }}>
                 <Meta
                   avatar={<Avatar src={user.avatar} />}
-                  title={user.username}
+                  title={`@${user.username}`}
                   description={user.professions.join(', ')}
                 />
               </Card>
@@ -119,10 +80,12 @@ function CommandPage() {
       </div>
 
       <Title level={3}>
-        {vacancies.length > 0 ? `Ищем: ${vacancies.join(', ')}` : 'Набор в команду не идет'}
+        {team.vacancies.length > 0
+          ? `Ищем: ${team.vacancies.join(', ')}`
+          : 'Набор в команду не идет'}
       </Title>
 
-      {vacancies.length > 0 && (
+      {team.vacancies.length > 0 && (
         <Button type="primary" style={{ marginBottom: '16px' }} onClick={showModal}>
           Подать заявку в команду
         </Button>
@@ -135,7 +98,7 @@ function CommandPage() {
         isVisible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        allProfessions={allProfessions}
+        allProfessions={team.vacancies}
         coverLetter={coverLetter}
         setCoverLetter={setCoverLetter}
         selectedPositions={selectedPositions}
@@ -147,6 +110,6 @@ function CommandPage() {
       )}
     </section>
   );
-}
+};
 
-export default CommandPage;
+export default TeamPage;

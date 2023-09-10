@@ -1,26 +1,21 @@
-import { List, Card } from 'antd';
+import { List, Card, Typography, Divider } from 'antd';
+
+const { Text } = Typography;
 const data = Array.from({ length: 23 }).map((_, i) => ({
   href: 'https://example.com',
-  title: `Пример хакатона ${i}`,
+  title: `Пример достижения ${i}`,
   avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
-  description:
-    'Пример хакатона - это мероприятие, где разработчики идеализируют, проектируют и создают программное обеспечение или аппаратное обеспечение за ограниченное время.',
-  content:
-    'Хакатоны обычно представляют собой соревнование, где участники работают в командах, чтобы решить реальные проблемы или создать новые продукты и сервисы.',
+  description: 'Бот для людей',
+  content: ' такую крутую фичу забабахал, бот для алкатонов',
 }));
-const IconText = (props) => (
-  <Space>
-    {React.createElement(props.icon)}
-    {props.text}
-  </Space>
-);
+
 const UserHackatonList = () => (
   <List
     pagination={{
       onChange: (page) => {
         console.log(page);
       },
-      pageSize: 6,
+      pageSize: 2,
       position: 'bottom',
       align: 'center',
     }}
@@ -36,7 +31,11 @@ const UserHackatonList = () => (
     dataSource={data}
     renderItem={(item) => (
       <List.Item>
-        <Card title={item.title}>Card content</Card>
+        <Card title={item.title}>
+          <Text>{item.description}</Text>
+          <Divider />
+          <Text>{item.content}</Text>
+        </Card>
       </List.Item>
     )}
   />

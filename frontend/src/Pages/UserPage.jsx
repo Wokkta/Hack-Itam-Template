@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Typography, Avatar, Button, Menu } from 'antd';
+import { Typography, Avatar, Button, Menu, Alert, Spin } from 'antd';
 import {
   CommentOutlined,
   AntDesignOutlined,
@@ -16,7 +16,8 @@ import TelegramIcon from '../assets/TelegramIcon.png';
 import VKIcon from '../assets/VKIcon.png';
 import MSTeamsIcon from '../assets/MSTeamsIcon.png';
 import HackatonsList from '../components/HackatonsList';
-import { useDispatch, useSelector } from 'react-redux';
+
+import useFetchUser from '../hooks/useFetchUser';
 const Sections = [
   {
     label: 'Хакатоны',
@@ -43,7 +44,8 @@ const Sections = [
 function UserPage() {
   const [current, setCurrent] = useState('hackatons');
   const { id } = useParams();
-  const user = useSelector((state) => state.user);
+
+  const { user, loading, error } = useFetchUser(id);
 
   const SectionsComponents = {
     hackatons: <HackatonsList />,
@@ -61,7 +63,7 @@ function UserPage() {
           xl: 4,
           xxl: 4,
         }}
-        items={user.Descriptions_items}
+        items={user?.Descriptions_items}
       />
     ),
   };
@@ -73,6 +75,8 @@ function UserPage() {
   const handleOpenPortfolio = () => {
     window.open(user?.portfolio, '_blank');
   };
+  if (loading) return <Spin size="large" />;
+
   return (
     <section
       style={{
@@ -82,6 +86,7 @@ function UserPage() {
         width: '100vw',
         paddingLeft: '10%',
       }}>
+      {!error ? <Alert message={`Error: ${error.message}`} type="error" /> : <></>}
       <div
         style={{
           display: 'flex',
@@ -103,8 +108,8 @@ function UserPage() {
             justifyContent: 'space-around',
             marginLeft: '10px',
           }}>
-          <Title>{user?.username}</Title>
-          <Text level={2}>{user?.fio}</Text>
+          <Title>@{user?.username}</Title>
+          <Text level={2}>{user?.name}</Text>
 
           <div
             style={{
@@ -115,12 +120,12 @@ function UserPage() {
               gap: '10px',
               marginTop: '20px',
             }}>
-            {user?.media?.telegram && (
+            {user?.social_networks?.telegram && (
               <a href={user.telegram}>
                 <img src={TelegramIcon} alt="Telegram" style={{ width: '30px', height: '30px' }} />
               </a>
             )}
-            {user?.media?.microsoftTeams && (
+            {user?.social_networks?.microsoftTeams && (
               <a href={user.microsoftTeams}>
                 <img
                   src={MSTeamsIcon}
@@ -129,7 +134,7 @@ function UserPage() {
                 />
               </a>
             )}
-            {user?.media?.vk && (
+            {user?.social_networks?.vk && (
               <a href={user.vk}>
                 <img src={VKIcon} alt="VK" style={{ width: '30px', height: '30px' }} />
               </a>

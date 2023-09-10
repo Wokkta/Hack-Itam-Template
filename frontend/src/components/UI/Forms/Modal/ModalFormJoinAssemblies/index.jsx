@@ -52,7 +52,7 @@ const ModalFormAssemblies = ({
       onOk={handleOk}
       onCancel={onCancel}
       footer={false}
-      width={'1000px'}>
+      width={'60vmax'}>
       <Form form={form}>
         {currentStep === 1 && (
           <>
@@ -197,35 +197,41 @@ const ModalFormAssemblies = ({
           <>
             <h2>3 этап Хакатон клуб</h2>
 
-            <Form.Item label="Немного организационных моментов :)">
+            <Form.Item label="Немного организационных моментов :)" labelCol={{ span: 24 }}>
               <TextArea
                 rows={4}
                 value={fieldsData.organizationalInfo}
                 onChange={(e) => handleFieldChange('organizationalInfo', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Есть ли у тебя друзья/одногруппники, которых ты хочешь видеть с тобой в сборных? Если да, то напиши их телеграм-Ники и отправь им эту анкету.">
+            <Form.Item
+              label="Есть ли у тебя друзья/одногруппники, которых ты хочешь видеть с тобой в сборных? Если да, то напиши их телеграм-Ники и отправь им эту анкету."
+              labelCol={{ span: 24 }}>
               <TextArea
                 rows={4}
                 value={fieldsData.friends}
                 onChange={(e) => handleFieldChange('friends', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Есть ли у тебя желание присоединиться к команде Хакатон клуба и помочь с его развитием? Если да, то чем?">
+            <Form.Item
+              label="Есть ли у тебя желание присоединиться к команде Хакатон клуба и помочь с его развитием? Если да, то чем?"
+              labelCol={{ span: 24 }}>
               <TextArea
                 rows={4}
                 value={fieldsData.joinClub}
                 onChange={(e) => handleFieldChange('joinClub', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="В рамках перезапуска Хакатон клуба у нас планируется начало по нескольким важным направлениям. Если у тебя есть желание в том числе прокачаться как организатор, стратег и лидер, то это отличная возможность.">
+            <Form.Item
+              labelCol={{ span: 24 }}
+              label="В рамках перезапуска Хакатон клуба у нас планируется начало по нескольким важным направлениям. Если у тебя есть желание в том числе прокачаться как организатор, стратег и лидер, то это отличная возможность.">
               <TextArea
                 rows={4}
                 value={fieldsData.clubPlans}
                 onChange={(e) => handleFieldChange('clubPlans', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Я впервые слышу о хакатон клубе...">
+            <Form.Item label="Я впервые слышу о хакатон клубе..." labelCol={{ span: 24 }}>
               <Checkbox.Group
                 value={fieldsData.heardAboutClub}
                 onChange={(values) => handleFieldChange('heardAboutClub', values)}>

@@ -13,6 +13,6 @@ run-frontend:
 	#port 80
 
 install:
-	python3.10 -m pip install -r requirements.txt
+	python3.10 -m pip install -r ./requirements.txt
 	npm install
 	npm install axious
