@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Query, Path, Header, HTTPException, status, Response
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
@@ -12,7 +14,7 @@ router = APIRouter(prefix="/api-publications")
 
 
 @router.get("/{item_id}", response_model=PublicationInfoResponse)
-async def read_item(item_id: int) -> Response:
+async def read_item(item_id: Annotated[int, Header()] = None) -> Response:
     json_compatible_item_data = jsonable_encoder(Response)
     return JSONResponse(content=json_compatible_item_data)
 
