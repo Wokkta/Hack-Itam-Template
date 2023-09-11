@@ -2,7 +2,7 @@ run-database:
 	# how????
 
 run-backend:	
-	cd backend && python3.10 -m uvicorn --host=0.0.0.0 entrypoints:app
+	cd backend && python3.10 -m uvicorn --host=158.160.58.123 entrypoints:app
 	#port 8000 / 8080
 	
 run-frontend:
