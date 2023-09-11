@@ -257,6 +257,7 @@ hackathons = [
         "event_end": datetime(2023, 8, 19),
         "registration_start": None,
         "registration_end": datetime(2023, 7, 31),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -273,6 +274,7 @@ hackathons = [
         "event_end": datetime(2023, 8, 29),
         "registration_start": None,
         "registration_end": datetime(2023, 7, 24),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -288,6 +290,7 @@ hackathons = [
         "event_end": datetime(2023, 8, 13),
         "registration_start": None,
         "registration_end": datetime(2023, 7, 28),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -303,6 +306,7 @@ hackathons = [
         "event_end": datetime(2023, 8, 20),
         "registration_start": None,
         "registration_end": datetime(2023, 8, 4),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -318,6 +322,7 @@ hackathons = [
         "event_end": None,
         "registration_start": None,
         "registration_end": None,
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -333,6 +338,7 @@ hackathons = [
         "event_end": datetime(2023, 9, 10),
         "registration_start": None,
         "registration_end": datetime(2023, 9, 5),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -348,6 +354,7 @@ hackathons = [
         "event_end": datetime(2023, 9, 14),
         "registration_start": None,
         "registration_end": datetime(2023, 8, 10),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -363,6 +370,7 @@ hackathons = [
         "event_end": datetime(2023, 9, 10),
         "registration_start": None,
         "registration_end": datetime(2023, 8, 4),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -378,6 +386,7 @@ hackathons = [
         "event_end": datetime(2023, 10, 14),
         "registration_start": None,
         "registration_end": datetime(2023, 9, 13),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -393,6 +402,7 @@ hackathons = [
         "event_end": datetime(2023, 10, 21),
         "registration_start": None,
         "registration_end": datetime(2023, 10, 1),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -408,6 +418,7 @@ hackathons = [
         "event_end": datetime(2023, 10, 1),
         "registration_start": None,
         "registration_end": datetime(2023, 9, 25),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -423,6 +434,7 @@ hackathons = [
         "event_end": datetime(2023, 9, 23),
         "registration_start": None,
         "registration_end": datetime(2023, 9, 11),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people":random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -438,6 +450,7 @@ hackathons = [
         "event_end": datetime(2023, 11, 30),
         "registration_start": None,
         "registration_end": datetime(2023, 9, 20),
+        "image": generate_random_image(),
         "tag": ", ".join(random.sample(tags, random.randint(1, len(tags)))),
         "amount_of_people": random.randint(3, 10),
         "price": random.uniform(10.0, 100.0),
@@ -451,8 +464,8 @@ hackathons = [
 # Вставка данных в таблицу "hack"
 for hackathon in hackathons:
     cur.execute("""
-        INSERT INTO hacks (hack_name, description, event_start, event_end, registration_start, registration_end,  tag, amount_of_people, price, format, city, reg_link, main_link)
-        VALUES (%(hack_name)s, %(description)s, %(event_start)s, %(event_end)s, %(registration_start)s,  %(registration_end)s, %(tag)s, %(amount_of_people)s, %(price)s, %(format)s, %(city)s, %(reg_link)s, %(main_link)s)
+        INSERT INTO hacks (hack_name, description, event_start, event_end, registration_start, registration_end, image,  tag, amount_of_people, price, format, city, reg_link, main_link)
+        VALUES (%(hack_name)s, %(description)s, %(event_start)s, %(event_end)s, %(registration_start)s,  %(registration_end)s, %(image)s, %(tag)s, %(amount_of_people)s, %(price)s, %(format)s, %(city)s, %(reg_link)s, %(main_link)s)
     """, hackathon)
 
 # Применяем изменения к базе данных
