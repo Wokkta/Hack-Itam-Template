@@ -17,17 +17,20 @@ const initialUserState = {
   id: 1,
 };
 
-const ModalFormAddHack = ({ visible, onCancel, onOk }) => {
+const ModalFormAddHack = ({ visible, onCancel, onOk, close }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const hacks = useSelector((state) => state.hackatons);
 
   const onFinish = (values) => {
     onOk(values);
-    console.log(values);
-    dispatch(setHackatons([...hacks, values]));
+    console.log(values, 'values');
+    const newValue = [...hacks, values];
+    newValue[newValue.length - 1]['id'] = hacks.length + 1;
+    dispatch(setHackatons(newValue));
     usePostHackaton(values);
     form.resetFields();
+    close();
   };
 
   return (
@@ -75,8 +78,23 @@ const ModalFormAddHack = ({ visible, onCancel, onOk }) => {
           rules={[{ required: true, message: 'Пожалуйста, введите URL фото' }]}>
           <Input />
         </Form.Item>
+        <Form.Item
+          name="description"
+          label="Описание"
+          labelCol={{ span: 24 }}
+          rules={[{ required: true, message: 'Пожалуйста, введите описание' }]}>
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          name="website"
+          label="Ссылка на сайт"
+          labelCol={{ span: 24 }}
+          rules={[{ required: true, message: 'Пожалуйста, введите ссылку на сайт' }]}>
+          <Input />
+        </Form.Item>
       </Form>
     </Modal>
   );
 };
+
 export default ModalFormAddHack;

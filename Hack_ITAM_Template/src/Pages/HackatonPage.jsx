@@ -12,26 +12,31 @@ const HackatonPage = () => {
   const { id } = useParams();
   const hackaton = useFetchHackaton(id);
   const hackatons = useSelector((state) => state.hackatons);
-  const hack = hackatons.filter((el) => el.id === id);
+  const hack = hackatons.filter((el) => el['id'] == id)[0];
+  console.log('hackaton', hackaton);
+  console.log('hack', hack);
   const data = {
-    title: hackaton?.title || hack[0]?.title || '',
-    location: hackaton?.location || hack[0]?.location || '',
-    format: hackaton?.format || hack[0]?.format || '',
-    teamComposition: hackaton?.team?.length || hack[0]?.team?.length || '3-5 участников',
-    rating: hackaton?.rating || hack[0]?.rating || 0,
+    title: hackaton?.title || hack?.title,
+    location: hackaton?.location || hack?.location,
+    format: hackaton?.format || hack?.format,
+    teamComposition: hackaton?.team?.length || hack?.team?.length || '3-5 участников',
+    rating: hackaton?.rating || hack?.rating || 0,
     solutions: hackaton?.solutions ||
-      hack[0]?.solutions || [
+      hack?.solutions || [
         { title: 'Решение 1', link: 'https://youtube.com' },
         { title: 'Решение 2', link: 'https://figma.com' },
         { title: 'Решение 3', link: 'https://github.com' },
       ],
-    photo: hackaton?.photo || hack[0]?.photo || 'https://example.com/hackaton1.jpg',
-    dates: hackaton?.dates?.[0] || hack[0]?.dates?.[0] || 'неизвестно',
-    registrationDates: hackaton?.dates?.[1] || hack[0]?.dates?.[1] || 'неизвестно',
+    photo: hackaton?.photo || hack?.photo,
+    dates: {
+      проведения: hackaton?.dates?.['проведения'] || hack?.dates?.['проведения'],
+      регистрации: hackaton?.dates?.['регистрации'] || hack?.dates?.['регистрации'],
+    },
     description:
       hackaton?.description ||
-      hack[0]?.description ||
-      'Это описание хакатона 1. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus assumenda delectus cum, id quae accusamus quas placeat ea culpa? Labore iure aut eius facere eos quam ut? Minus, in officiis!',
+      hack?.description ||
+      'Это описание хакатона . Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus assumenda delectus cum, id quae accusamus quas placeat ea culpa? Labore iure aut eius facere eos quam ut? Minus, in officiis!',
+    website: hackaton?.website || hack?.website || '',
   };
   const showModal = () => {
     setVisible(true);

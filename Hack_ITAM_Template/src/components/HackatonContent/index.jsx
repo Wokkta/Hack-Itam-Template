@@ -24,14 +24,12 @@ function HackatonContent({ data }) {
           gap: '100px',
           alignItems: 'flex-end',
           maxWidth: '1200px',
-
           margin: '0 auto',
           padding: '16px',
         }}>
         <div style={{ maxWidth: '400px' }}>
           <Title level={2}>{data.title}</Title>
           <Divider />
-          <div></div>
           <List>
             <List.Item>
               <Text strong>Место проведения:</Text> {data.location}
@@ -48,57 +46,50 @@ function HackatonContent({ data }) {
             <List.Item>
               <Text strong>Решения:</Text>
               <div style={{ display: 'flex', minWidth: '100px', justifyContent: 'space-between' }}>
-                {data?.solutions && (
-                  <>
-                    {data.solutions.map((solution, index) => {
-                      let iconSrc = '';
-                      let altText = '';
+                {data?.solutions &&
+                  data.solutions.map((solution, index) => {
+                    let iconSrc = '';
+                    let altText = '';
 
-                      if (solution.link.includes('github')) {
-                        iconSrc = GithubIcon;
-                        altText = 'GitHub';
-                      } else if (solution.link.includes('youtube')) {
-                        iconSrc = YoutubeIcon;
-                        altText = 'YouTube';
-                      } else if (solution.link.includes('habr')) {
-                        iconSrc = HabrIcon;
-                        altText = 'Habr';
-                      } else if (solution.link.includes('figma')) {
-                        iconSrc = FigmaIcon;
-                        altText = 'Figma';
-                      }
+                    if (solution.link.includes('github')) {
+                      iconSrc = GithubIcon;
+                      altText = 'GitHub';
+                    } else if (solution.link.includes('youtube')) {
+                      iconSrc = YoutubeIcon;
+                      altText = 'YouTube';
+                    } else if (solution.link.includes('habr')) {
+                      iconSrc = HabrIcon;
+                      altText = 'Habr';
+                    } else if (solution.link.includes('figma')) {
+                      iconSrc = FigmaIcon;
+                      altText = 'Figma';
+                    }
 
-                      return (
-                        <a href={solution.link} key={index}>
-                          <img
-                            src={iconSrc}
-                            alt={altText}
-                            style={{ width: '30px', height: '30px' }}
-                          />
-                        </a>
-                      );
-                    })}
-                  </>
-                )}
+                    return (
+                      <a href={solution.link} key={index}>
+                        <img
+                          src={iconSrc}
+                          alt={altText}
+                          style={{ width: '30px', height: '30px' }}
+                        />
+                      </a>
+                    );
+                  })}
               </div>
             </List.Item>
             <List.Item>
               <Text strong>Ссылка на хакатон:</Text>{' '}
-              <a href={data.hackatonLink} target="_blank" rel="noreferrer">
-                {data.hackatonLink}
+              <a href={data.website} target="_blank" rel="noreferrer">
+                {data.website}
               </a>
             </List.Item>
+            <List.Item>
+              <Text strong>Даты проведения:</Text> {data.dates?.проведения}
+            </List.Item>
+            <List.Item>
+              <Text strong>Даты регистрации:</Text> {data.dates?.регистрации}
+            </List.Item>
           </List>
-          <Divider />
-          <div>
-            <Text strong>Даты проведения: </Text>
-            <Text>{data.dates}</Text>
-          </div>
-          <Divider />
-          <div>
-            <Text strong>Даты регистрации: </Text>
-            <Text>{data.registrationDates}</Text>
-          </div>
           <Divider />
           <div>
             <Title level={3}>Секция с комментариями и описанием</Title>
@@ -107,10 +98,7 @@ function HackatonContent({ data }) {
         </div>
 
         <img
-          src={
-            'https://static.tildacdn.com/tild3833-3838-4337-b635-666564323962/rlt_hack.png' ||
-            data.photo
-          }
+          src={data.photo}
           alt={data.title}
           style={{ maxWidth: '600px', width: '100%', height: 'auto' }}
         />

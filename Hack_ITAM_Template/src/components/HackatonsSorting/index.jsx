@@ -118,7 +118,12 @@ const HackatonsSorting = () => {
             onClick={showModalAddHack}>
             Добавить хакатон
           </Button>
-          <ModalFormAddHack visible={isModalToAddVisible} onCancel={handleCancel} onOk={handleOk} />
+          <ModalFormAddHack
+            visible={isModalToAddVisible}
+            onCancel={handleCancel}
+            onOk={handleOk}
+            close={() => setIsModalToAddVisible(false)}
+          />
         </>
       ) : (
         <></>
