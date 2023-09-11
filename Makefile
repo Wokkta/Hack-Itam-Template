@@ -8,10 +8,10 @@ run-backend:
 run-frontend:
 	cd frontend
 	npm install
+	npm install axious
 	npm run dev
 	#port 80
 
 install:
 	python3.10 -m pip install -r ./requirements.txt
-	npm install
-	npm install axious
+	

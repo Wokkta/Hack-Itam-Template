@@ -8,31 +8,35 @@ CREATE TABLE admins (
 
 -- Создание таблицы "hacks"
 CREATE TABLE hacks (
-    hack_id serial PRIMARY KEY,
-    hack_name VARCHAR(40),
-    description text,
-	event_start TIMESTAMP WITH TIME ZONE,
-	event_end TIMESTAMP WITH TIME ZONE,
-	registration_start TIMESTAMP WITH TIME ZONE,
-	registration_end TIMESTAMP WITH TIME ZONE,
-    tag text[],
-    amount_of_people integer,
-    price numeric,
-    format varchar(20),
-    city varchar(20),
-	reg_link text,
-	main_link text
+    id serial PRIMARY KEY,
+    name varchar(255) NOT NULL,
+    website_link varchar(255) NOT NULL,
+    registration_link varchar(255),
+    registration_started_at timestamp without time zone,
+    registration_ended_at timestamp without time zone NOT NULL,
+    event_started_at timestamp without time zone,
+    event_ended_at timestamp without time zone,
+    format varchar(50) NOT NULL,
+    city varchar(255),
+    prize varchar(255),
+    team_members_number_min integer,
+    team_members_number_max integer NOT NULL,
+    tags text[],
+    description text NOT NULL
 );
+
 
 -- Создание таблицы "teams"
 CREATE TABLE teams (
-    team_id serial PRIMARY KEY,
-	name varchar(20),
+    id serial PRIMARY KEY,
+    team_name varchar(255) NOT NULL,
+    assemblies 
+    members integer NOT NULL,
+    captain integer NOT NULL,
     image bytea,
-    division integer,
     description text
-	
 );
+
 
 -- Создание таблицы "users"
 CREATE TABLE "users" (

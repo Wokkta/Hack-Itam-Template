@@ -22,22 +22,21 @@ class UserCreateRequest(BaseModel):
 
 class TeamCreateRequest(BaseModel):
     team_name: str = Field(..., example="BelieveX")
-    members: set[str] = Field(
+ 
+    members: set[int] = Field(
         ...,
-        example=(
-            "teadove",
-            "yuki_shi",
-        ),
+        example=(22, 1, 3, ),
     )  # usernames, no captain, only other members
     capitan: int = Field(..., example="23")  # take user id who created team
     image: bytes | None = None
     description: str | None = None
 
 
-class HackCreateRequest(BaseModel):
-    name: str
-    website_link: str
-    registration_link: str
+class HackInfoResponse(BaseModel):
+    id: int = Field(..., example=1)
+    name: str = Field(..., example="LCT 2023 Moscow ")
+    website_link: str = Field(..., example="https://leaders2023.innoagency.ru/")
+    registration_link: str | None = Field(example=None)
     registration_started_at: datetime | None = Field(
         ..., example=datetime(2023, 4, 23, 00, 00, 00, 0)
     )
@@ -52,17 +51,12 @@ class HackCreateRequest(BaseModel):
     )
     format: str = Field(..., example="online")
     city: str | None = Field(..., example="Moscow")  # can be more than one city ???
-    prize: str
+    prize: str | None = Field(..., example="$1000")
     team_members_number_min: int | None = Field(..., example=2)
     team_members_number_max: int = Field(..., example=5)
-    tags: set[str] | None = Field(
-        ...,
-        example=(
-            "ml",
-            "backend",
-        ),
-    )
-    description: str = Field(..., example="cool description")  # @su-mrak add annotated
+    tags: set[str] | None = Field(..., example=["ml", "design"])
+    description: str = Field(..., example="")
+
 
 
 class PublicationCreateRequest(BaseModel):

@@ -19,9 +19,11 @@ class UserInfoResponse(BaseModel):
 class TeamInfoResponse(BaseModel):
     id: int = Field(..., example=1)
     team_name: str = Field(..., example="BelieveX")
-    members: list[str] = Field(
-        ..., example=["teadove", "chiki"]
-    )  # usernames, no captain, only other members
+    assemblies: bool = Field(..., example="True")
+    members: set[int] = Field(
+        ...,
+        example=(22, 1, 3, ),
+    ) 
     capitan: int = Field(..., example=1)  # take user id who created team
     image: bytes | None = None
     description: str | None = None
