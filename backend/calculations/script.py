@@ -3,7 +3,7 @@ import json
 
 # Подключение к базе данных
 connection = psycopg2.connect(
-    host="158.160.58.123",
+    host="172.18.0.2",
     database="postgres",
     user="admin",
     password="0000"
