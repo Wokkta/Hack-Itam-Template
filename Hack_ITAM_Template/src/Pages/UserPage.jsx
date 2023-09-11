@@ -10,7 +10,7 @@ import {
 import { Descriptions } from 'antd';
 import { useParams } from 'react-router-dom';
 const { Title, Text } = Typography;
-import CommandsList from '../components/commandsList';
+import TeamsList from '../components/TeamsList';
 import UserHackatonList from '../components/UserHackatonList';
 import TelegramIcon from '../assets/TelegramIcon.png';
 import VKIcon from '../assets/VKIcon.png';
@@ -49,7 +49,7 @@ function UserPage() {
 
   const SectionsComponents = {
     hackatons: <HackatonsList />,
-    teams: <CommandsList />,
+    teams: <TeamsList />,
     achievements: <UserHackatonList />,
     statistics: (
       <Descriptions
@@ -86,7 +86,7 @@ function UserPage() {
         width: '100vw',
         paddingLeft: '10%',
       }}>
-      {!error ? <Alert message={`Error: ${error.message}`} type="error" /> : <></>}
+      {error ? <Alert message={`Error: ${error.message}`} type="error" /> : <></>}
       <div
         style={{
           display: 'flex',
@@ -110,6 +110,9 @@ function UserPage() {
           }}>
           <Title>@{user?.username}</Title>
           <Text level={2}>{user?.name}</Text>
+          <Text mark level={2}>
+            {user?.status}
+          </Text>
 
           <div
             style={{

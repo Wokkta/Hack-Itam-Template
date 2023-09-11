@@ -1,5 +1,5 @@
-import Footer from '../Footer';
-import Header from '../Header';
+import Header from '../UI/Headers/Header';
+import Footer from '../UI/Footers/Footer';
 
 function Layout({ children }) {
   return (

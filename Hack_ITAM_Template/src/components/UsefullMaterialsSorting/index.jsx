@@ -1,33 +1,26 @@
 import React, { useState } from 'react';
-import { Card, Select, Switch, Tag } from 'antd';
+import { Button, Card, Select, Switch, Tag, notification } from 'antd';
 import styles from './UsefullMaterialsSorting.module.sass';
+
+import ModalFormToHelp from '../UI/Forms/Modal/ModalFormToHelp';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 
 const UsefullMaterialsSorting = () => {
-  const [queryString, setQueryString] = useState(''); // Хранение строки запроса
-  const [category, setCategory] = useState();
-  const [platform, setPlatform] = useState();
-  const [sortBy, setSortBy] = useState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [recommendation, setRecommendation] = useState(false);
   const [tags, setTags] = useState([]);
+  const [problemDescription, setProblemDescription] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const user = useSelector((state) => state.user);
   const onChangeCategory = (value) => {
-    setCategory(value);
+    setSelectedCategory(value);
   };
-
-  const onSort = (value) => {
-    setSortBy(value);
-  };
-
-  const onSortByPlatform = (value) => {
-    setPlatform(value);
-  };
-
   const onSearch = (value) => {
     setQueryString(value);
   };
-
   const onRecommendationSwitch = (checked) => {
     setRecommendation(checked);
   };
@@ -40,6 +33,38 @@ const UsefullMaterialsSorting = () => {
 
   const onTagClose = (tag) => {
     setTags(tags.filter((t) => t !== tag));
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+
+    const requestData = {
+      userId: user.id,
+
+      coverLetter: `Сопроводительное письмо: ${problemDescription} \n\n Профиль: ${JSON.stringify(
+        user,
+      )}`,
+
+      selectedCategory: selectedCategory,
+    };
+
+    notification.success({
+      message: 'Заявка отправлена',
+      description: 'Ваша заявка отправлена на рассмотрение.',
+    });
+
+    console.log('Заявка отправлена:', requestData);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+
+    setProblemDescription('');
+    setSelectedCategory(null);
   };
 
   return (
@@ -74,46 +99,6 @@ const UsefullMaterialsSorting = () => {
                 label: 'Хакатон 2',
               },
               // Добавьте другие хакатоны по аналогии...
-            ]}
-          />
-          <Select
-            className={styles.antSelect}
-            showSearch
-            placeholder="Sort by"
-            optionFilterProp="children"
-            onChange={onSort}
-            filterOption={(input, option) =>
-              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-            }
-            options={[
-              {
-                value: 'date',
-                label: 'Date',
-              },
-              {
-                value: 'popularity',
-                label: 'Popularity',
-              },
-            ]}
-          />
-          <Select
-            className={styles.antSelect}
-            showSearch
-            placeholder="Platform"
-            optionFilterProp="children"
-            onChange={onSortByPlatform}
-            filterOption={(input, option) =>
-              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-            }
-            options={[
-              {
-                value: 'pc',
-                label: 'PC',
-              },
-              {
-                value: 'browser',
-                label: 'Browser',
-              },
             ]}
           />
         </>
@@ -159,6 +144,28 @@ const UsefullMaterialsSorting = () => {
           </div>
         </>
       )}
+      <Button
+        type="primary"
+        className="ant-btn-animate"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '20px',
+        }}
+        onClick={showModal}>
+        Попросить помощь
+      </Button>
+      <ModalFormToHelp
+        isVisible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        problemDescription={problemDescription}
+        setProblemDescription={setProblemDescription}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        categories={['айти', 'хакатоны', 'иное']} // Замените на свой список категорий
+      />
     </div>
   );
 };

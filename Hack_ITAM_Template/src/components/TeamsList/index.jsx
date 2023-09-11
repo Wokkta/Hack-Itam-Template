@@ -40,7 +40,7 @@ const IconText = (props) => (
     {props.text}
   </Space>
 );
-const CommandsList = () => (
+const TeamsList = () => (
   <List
     itemLayout="vertical"
     size="large"
@@ -80,4 +80,4 @@ const CommandsList = () => (
     )}
   />
 );
-export default CommandsList;
+export default TeamsList;

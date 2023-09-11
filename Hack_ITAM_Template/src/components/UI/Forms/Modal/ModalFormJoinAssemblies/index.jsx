@@ -57,19 +57,19 @@ const ModalFormAssemblies = ({
         {currentStep === 1 && (
           <>
             <h2>1 этап</h2>
-            <Form.Item label="Как тебя зовут? (ФИО)">
+            <Form.Item label="Как тебя зовут? (ФИО)" required>
               <Input
                 value={fieldsData.name}
                 onChange={(e) => handleFieldChange('name', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Контактная почта (какую чаще читаешь)">
+            <Form.Item label="Контактная почта (какую чаще читаешь)" required>
               <Input
                 value={fieldsData.email}
                 onChange={(e) => handleFieldChange('email', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Телеграм">
+            <Form.Item label="Телеграм" required>
               <Input
                 value={fieldsData.telegram}
                 onChange={(e) => handleFieldChange('telegram', e.target.value)}
@@ -81,7 +81,7 @@ const ModalFormAssemblies = ({
                 onChange={(e) => handleFieldChange('github', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Курс">
+            <Form.Item label="Курс" required>
               <Select
                 value={fieldsData.course}
                 onChange={(value) => handleFieldChange('course', value)}>
@@ -92,7 +92,7 @@ const ModalFormAssemblies = ({
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item label="Институт">
+            <Form.Item label="Институт" required>
               <Select
                 value={fieldsData.institute}
                 onChange={(value) => handleFieldChange('institute', value)}>
@@ -103,7 +103,7 @@ const ModalFormAssemblies = ({
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item label="Направление">
+            <Form.Item label="Направление" required>
               <Select
                 value={fieldsData.direction}
                 onChange={(value) => handleFieldChange('direction', value)}>
@@ -120,7 +120,7 @@ const ModalFormAssemblies = ({
         {currentStep === 2 && (
           <>
             <h2>2 этап</h2>
-            <Form.Item label="Skills">
+            <Form.Item label="Skills" required>
               <TextArea
                 rows={4}
                 value={fieldsData.skills}
@@ -134,7 +134,7 @@ const ModalFormAssemblies = ({
                 onChange={(e) => handleFieldChange('additionalSkills', e.target.value)}
               />
             </Form.Item>
-            <Form.Item label="Какую роль ты можешь занимать в сборной? *">
+            <Form.Item label="Какую роль ты можешь занимать в сборной? " required>
               <Checkbox.Group
                 value={fieldsData.teamRoles}
                 onChange={(values) => handleFieldChange('teamRoles', values)}>
@@ -148,7 +148,7 @@ const ModalFormAssemblies = ({
                 <Checkbox value="Другое">Другое</Checkbox>
               </Checkbox.Group>
             </Form.Item>
-            <Form.Item label="Какие знаешь языки? *">
+            <Form.Item label="Какие знаешь языки? " required>
               <Checkbox.Group
                 value={fieldsData.languages}
                 onChange={(values) => handleFieldChange('languages', values)}>

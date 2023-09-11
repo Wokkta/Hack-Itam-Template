@@ -22,7 +22,7 @@ const useGetUser = (id) => {
 
   useEffect(() => {
     const url = `http://158.160.58.123:8000/api-users/${id}`;
-
+    setTimeout(() => setLoading(false), 1000);
     axios
       .get(url, {
         headers: {

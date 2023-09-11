@@ -22,17 +22,18 @@ function Header() {
         <Link to="/registration" style={{ padding: 5 }}>
           Test
         </Link>
+        <Link to="/auth" style={{ padding: 5 }}>
+          Test
+        </Link>
         {userId ? (
           <Link to={`/user/${userId}`} style={{ padding: 5 }}>
-            <Button>ЛК</Button>
+            <span>Личный кабинет</span>
           </Link>
         ) : (
           <Link to="/registration" style={{ padding: 5 }}>
-            <Button>ЛК</Button>
+            <span>Личный кабинет</span>
           </Link>
         )}
-        /// change way
-        <Link to="/:id">12</Link>
       </nav>
     </header>
   );

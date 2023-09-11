@@ -28,7 +28,7 @@ const ModalForm = ({
         <Form.Item label="Сопроводительное письмо">
           <TextArea rows={4} value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} />
         </Form.Item>
-        <Form.Item label="Выберите позиции">
+        <Form.Item label="Выберите позиции" required={true}>
           <Checkbox.Group value={selectedPositions} onChange={handlePositionChange}>
             {allProfessions.map((position) => (
               <Checkbox key={position} value={position}>

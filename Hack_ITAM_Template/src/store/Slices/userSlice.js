@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  id: 12,
-  url: '',
-  fio: ' Антонио Бандерас',
-  username: 'Zorro',
-  portfolio: 'https://example.com/portfolio',
-  media: {
-    microsoftTeams: 'https://microsoft.com',
-    telegram: 'https://telegram',
-    vk: 'https://vk.com',
+  id: 1,
+  username: 'sab_boy',
+  status: 'admin',
+  name: 'Арсений Синицын',
+  social_networks: {
+    github: 'su-mrak',
+    telegram: '@creamsoda0',
+    vk: 'nitumisis',
   },
+  stack: ['c++', 'python', 'fastapi'],
+  tags: [],
+  image: 'string',
+  description: "I wish u best but I'm the best.",
+
   Descriptions_items: [
     {
       label: 'Количество участий в хакатонах',

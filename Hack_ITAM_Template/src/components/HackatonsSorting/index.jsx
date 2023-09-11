@@ -3,6 +3,8 @@ import { Button, Form, Radio, Select } from 'antd';
 
 import styles from './HackatonsSorting.module.sass';
 import ModalFormAssemblies from '../UI/Forms/Modal/ModalFormJoinAssemblies';
+import { useSelector } from 'react-redux';
+import ModalFormAddHack from '../UI/Forms/Modal/ModalFormAddHack';
 
 const { Option } = Select;
 const initialFieldsData = {
@@ -31,16 +33,20 @@ const initialFieldsData = {
 
 const HackatonsSorting = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalToAddVisible, setIsModalToAddVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [fieldsData, setFieldData] = useState(initialFieldsData);
-
+  const user = useSelector((state) => state.user);
   const [form] = Form.useForm();
   useEffect(() => {
     console.log(formData, 'formData');
   }, formData);
   const showModal = () => {
     setIsModalVisible(true);
+  };
+  const showModalAddHack = () => {
+    setIsModalToAddVisible(true);
   };
   const handleOptionChange = (e) => {
     console.log(`radio checked:${e.target.value}`);
@@ -58,6 +64,7 @@ const HackatonsSorting = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setIsModalToAddVisible(false);
     setCurrentStep(1);
     form.resetFields();
   };
@@ -81,21 +88,6 @@ const HackatonsSorting = () => {
         <Option value="robotics">Robotics</Option>
       </Select>
 
-      <Select
-        className={styles.antSelect}
-        showSearch
-        placeholder="Sort by"
-        optionFilterProp="children">
-        {/* Options go here */}
-      </Select>
-
-      <Select
-        className={styles.antSelect}
-        showSearch
-        placeholder="Platform"
-        optionFilterProp="children">
-        {/* Options go here */}
-      </Select>
       <Radio.Group onChange={handleOptionChange} defaultValue="a">
         <Radio.Button value="recommended">Рекомендованные</Radio.Button>
         <Radio.Button value="registrationOpen">Открыта регистрация</Radio.Button>
@@ -112,6 +104,25 @@ const HackatonsSorting = () => {
         onClick={showModal}>
         Подать заявку в сборную
       </Button>
+      {user && user.status === 'admin' ? (
+        <>
+          <Button
+            type="primary"
+            className="ant-btn-animate"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontSize: '20px',
+            }}
+            onClick={showModalAddHack}>
+            Добавить хакатон
+          </Button>
+          <ModalFormAddHack visible={isModalToAddVisible} onCancel={handleCancel} onOk={handleOk} />
+        </>
+      ) : (
+        <></>
+      )}
 
       {isModalVisible && (
         <ModalFormAssemblies
