@@ -228,7 +228,7 @@ for i in range(20):
     catalog_entry = {
         "url": url,
         "inner_link": inner_link,
-        "status": random.choice(["Accepted", "Denied", "Pending"])
+        "status": random.choice(["Accepted", "Denied", "Pending"]),
         "interests": interests,
         "created_by": created_by,
         "description": description,
