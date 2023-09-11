@@ -3,10 +3,10 @@ import json
 
 # Подключение к базе данных
 connection = psycopg2.connect(
-    host="your_host",
-    database="your_database",
-    user="your_user",
-    password="your_password"
+    host="158.160.58.123",
+    database="postgres",
+    user="admin",
+    password="0000"
 )
 cursor = connection.cursor()
 
