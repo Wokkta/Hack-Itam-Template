@@ -122,7 +122,7 @@ const HackatonsSorting = () => {
             visible={isModalToAddVisible}
             onCancel={handleCancel}
             onOk={handleOk}
-            close={() => setIsModalToAddVisible(false)}
+            close={handleCancel}
           />
         </>
       ) : (

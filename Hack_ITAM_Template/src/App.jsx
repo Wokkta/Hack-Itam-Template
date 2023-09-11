@@ -16,6 +16,7 @@ function App() {
   return (
     <Router>
       <Layout>
+        <Background />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
@@ -35,3 +36,17 @@ function App() {
 export default App;
 
 import React from 'react';
+
+const Background = () => {
+  return (
+    <div className="background">
+      <div className="blur-overlay"></div>
+      <div className="shapes">
+        <div className="shape shape1"></div>
+        <div className="shape shape2"></div>
+        <div className="shape shape3"></div>
+        {/* Добавьте дополнительные элементы shape по вашему выбору */}
+      </div>
+    </div>
+  );
+};

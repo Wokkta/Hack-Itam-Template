@@ -86,7 +86,7 @@ function UserPage() {
         width: '100vw',
         paddingLeft: '10%',
       }}>
-      {error ? <Alert message={`Error: ${error.message}`} type="error" /> : <></>}
+      {!error ? <Alert message={`Error`} type="error" /> : <></>}
       <div
         style={{
           display: 'flex',

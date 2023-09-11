@@ -61,7 +61,7 @@ function RegistrationPage() {
   };
 
   return (
-    <section style={{ display: 'flex', justifyContent: 'center' }}>
+    <section style={{ display: 'flex', justifyContent: 'center', marginTop: '30vh' }}>
       <Form
         name="registration"
         scrollToFirstError

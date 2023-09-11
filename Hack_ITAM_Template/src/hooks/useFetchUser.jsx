@@ -18,7 +18,7 @@ const useGetUser = (id) => {
     description: "I wish u best but I'm the best.",
   });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const url = `http://158.160.58.123:8000/api-users/${id}`;
@@ -34,7 +34,7 @@ const useGetUser = (id) => {
         setLoading(false);
       })
       .catch((error) => {
-        setError(error);
+        setError(true);
         setLoading(false);
       });
   }, [id]);

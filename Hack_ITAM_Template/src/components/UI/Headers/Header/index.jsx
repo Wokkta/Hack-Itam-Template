@@ -20,10 +20,10 @@ function Header() {
           Хакатоны
         </Link>
         <Link to="/registration" style={{ padding: 5 }}>
-          Test
+          Регистрация
         </Link>
         <Link to="/auth" style={{ padding: 5 }}>
-          Test
+          Авторизация
         </Link>
         {userId ? (
           <Link to={`/user/${userId}`} style={{ padding: 5 }}>
