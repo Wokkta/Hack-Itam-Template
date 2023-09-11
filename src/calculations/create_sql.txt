@@ -16,12 +16,13 @@ CREATE TABLE hacks (
 	registration_start TIMESTAMP WITH TIME ZONE,
 	registration_end TIMESTAMP WITH TIME ZONE,
     tag text[],
+    image bytea,
     amount_of_people integer,
     price numeric,
     format varchar(20),
     city varchar(20),
-	reg_link text,
-	main_link text
+    reg_link text,
+    main_link text
 );
 
 -- Создание таблицы "team"
